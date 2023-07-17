@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request, abort
-from models import models
+from models import User
 from config import app, db, api
 
 

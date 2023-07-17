@@ -4,13 +4,6 @@ from sqlalchemy.orm import validates
 
 from config import db, bcrypt
 
-convention = {
-    "ix": "ix_%(column_0_label)s",
-    "uq": "uq_%(table_name)s_%(column_0_name)s",
-    "ck": "ck_%(table_name)s_%(constraint_name)s",
-    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
-    "pk": "pk_%(table_name)s"
-}
 
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
@@ -41,8 +34,8 @@ class Review(db.Model, SerializerMixin):
     serialize_rules = ('-user.reviews','-accommodation.reviews')
 
     review_id = db.Column(db.Integer, primary_key=True)
-    writer_id = db.Column(db.Integer, db.ForeignKey('User.user_id'))
-    accomodations_id = db.Column(db.Integer, db.ForeignKey('Accomodations.accomodations_id'))
+    writer_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    accomodations_id = db.Column(db.Integer, db.ForeignKey('accommodations.accommodation_id'))
     rating = db.Column(db.Integer)
     comment = db.Column(db.String)
 
@@ -53,13 +46,13 @@ class Review(db.Model, SerializerMixin):
 
     # ArtistBooking Model
 class ArtistBooking(db.Model, SerializerMixin):
-    __tablename__ = 'ArtistBooking'
+    __tablename__ = 'artist_bookings'
 
     serialize_rules= ('-show.artist_bookings', '-accommodation.artist_bookings')
 
     artist_booking_id = db.Column(db.Integer, primary_key=True)
-    show_id = db.Column(db.Integer, db.ForeignKey('Show.show_id'))
-    accomodations_id = db.Column(db.Integer, db.ForeignKey('Accomodations.accomodations_id'))
+    show_id = db.Column(db.Integer, db.ForeignKey('shows.show_id'))
+    accomodations_id = db.Column(db.Integer, db.ForeignKey('accommodations.accommodation_id'))
     booking_date = db.Column(db.Date)
     accepted = db.Column(db.Integer) # 0 for false, 1 for true
     
@@ -72,12 +65,12 @@ class ArtistBooking(db.Model, SerializerMixin):
 
     #Show Model
 class Show(db.Model, SerializerMixin):
-    __tablename__ = 'Show'
+    __tablename__ = 'shows'
 
     serialize_rules= ('-artist.shows', '-artist_bookings.show')
 
     show_id = db.Column(db.Integer, primary_key=True)
-    artist_id = db.Column(db.Integer, db.ForeignKey('User.user_id'))
+    artist_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     bandmates = db.Column(db.Integer)
     location = db.Column(db.String)
     genre = db.Column(db.String)
@@ -86,12 +79,12 @@ class Show(db.Model, SerializerMixin):
     artist = db.relationship('User', backref='shows')
 
 class Accommodation(db.Model, SerializerMixin):
-    __tablename__ = 'accommodation'
+    __tablename__ = 'accommodations'
 
-    serialize_rules= ('-host.accommodations','-reviews.accomodation', '-artist_bookings.accomodation')
+    serialize_rules= ('-host.accommodations','-reviews.accommodation', '-artist_bookings.accomodation')
 
     accommodation_id = db.Column(db.Integer, primary_key=True)
-    host_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    host_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     location = db.Column(db.String)
     beds = db.Column(db.Integer)
     baths = db.Column(db.Float)
@@ -100,10 +93,10 @@ class Accommodation(db.Model, SerializerMixin):
     availability_dates = db.Column(db.Date)
 
 # Establish a relationship between User and Accommodation
-    host = db.relationship(User, backref="accommodations")
+    host = db.relationship("User", backref="accommodations")
 
 # Establish a one-to-many relationship between Accommodation and Review
-    reviews = db.relationship(Review, backref="accommodation")
+    reviews = db.relationship("Review", backref="accommodation")
 
 # Establish a one-to-many relationship between Accommodation and ArtistBooking
-    artist_bookings = db.relationship(ArtistBooking, backref="accommodation")
+    artist_bookings = db.relationship("ArtistBooking", backref="accommodation")
