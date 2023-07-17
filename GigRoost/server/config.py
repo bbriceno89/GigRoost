@@ -7,6 +7,8 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 
 app = Flask(__name__)
+app.secret_key = b'\xed\xde\xa1\xd5\xe7\x05\xc5\x94\x8dG\xb4cy\x16VH\xdf\xa7\x9e\x8b\xcb\x82\xe6Q'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 
 # Set the base directory of your project
 basedir = os.path.abspath(os.path.dirname(__file__))
