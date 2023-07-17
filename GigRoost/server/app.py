@@ -8,18 +8,18 @@ from config import app, db, api
 class Signup(Resource):
     def post(self):
         # try:
-        data = request.get_json()
-        print(data['username'], data['password'], data['account_type'])
-        new_user = User(
-            username = data['username'],
-            account_type = data['account_type']
-        )
-        print(new_user.username)
-        new_user.password_hash = data['password']
-        db.session.add(new_user)
-        db.session.commit()
-        session['user_id'] = new_user.user_id
-        return make_response(new_user.to_dict(), 201)
+            data = request.get_json()
+            print(data['username'], data['password'], data['account_type'])
+            new_user = User(
+                username = data['username'],
+                account_type = data['account_type']
+            )
+            print(new_user.username)
+            new_user.password_hash = data['password']
+            db.session.add(new_user)
+            db.session.commit()
+            session['user_id'] = new_user.user_id
+            return make_response(new_user.to_dict(), 201)
         # except:
         #     return make_response({'errors':['validation errors']}, 400)
 

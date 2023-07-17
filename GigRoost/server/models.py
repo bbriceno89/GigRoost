@@ -81,7 +81,7 @@ class Show(db.Model, SerializerMixin):
 class Rental(db.Model, SerializerMixin):
     __tablename__ = 'rentals'
 
-    serialize_rules= ('-host.rentals','-reviews.rental', '-artist_bookings.rental')
+    serialize_rules= ('-host.rentals','-review.rental', '-artist_bookings.rental')
 
     rental_id = db.Column(db.Integer, primary_key=True)
     host_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
@@ -94,9 +94,3 @@ class Rental(db.Model, SerializerMixin):
 
 # Establish a relationship between User and Rental
     host = db.relationship("User", backref="rentals")
-
-# Establish a one-to-many relationship between Rental and Review
-    reviews = db.relationship("Review", backref="rental")
-
-# Establish a one-to-many relationship between Rental and ArtistBooking
-    artist_bookings = db.relationship("ArtistBooking", backref="rental")

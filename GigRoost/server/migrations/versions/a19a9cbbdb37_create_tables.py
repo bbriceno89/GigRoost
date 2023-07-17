@@ -1,8 +1,8 @@
 """create tables
 
-Revision ID: 3be262f6e6b8
+Revision ID: a19a9cbbdb37
 Revises: 
-Create Date: 2023-07-17 13:54:31.983749
+Create Date: 2023-07-17 15:39:40.276986
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3be262f6e6b8'
+revision = 'a19a9cbbdb37'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,8 +26,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('user_id'),
     sa.UniqueConstraint('username')
     )
-    op.create_table('accommodations',
-    sa.Column('accommodation_id', sa.Integer(), nullable=False),
+    op.create_table('rentals',
+    sa.Column('rental_id', sa.Integer(), nullable=False),
     sa.Column('host_id', sa.Integer(), nullable=True),
     sa.Column('location', sa.String(), nullable=True),
     sa.Column('beds', sa.Integer(), nullable=True),
@@ -35,8 +35,8 @@ def upgrade():
     sa.Column('sq_ft', sa.Integer(), nullable=True),
     sa.Column('description', sa.String(), nullable=True),
     sa.Column('availability_dates', sa.Date(), nullable=True),
-    sa.ForeignKeyConstraint(['host_id'], ['users.user_id'], name=op.f('fk_accommodations_host_id_users')),
-    sa.PrimaryKeyConstraint('accommodation_id')
+    sa.ForeignKeyConstraint(['host_id'], ['users.user_id'], name=op.f('fk_rentals_host_id_users')),
+    sa.PrimaryKeyConstraint('rental_id')
     )
     op.create_table('shows',
     sa.Column('show_id', sa.Integer(), nullable=False),
@@ -50,20 +50,20 @@ def upgrade():
     op.create_table('Review',
     sa.Column('review_id', sa.Integer(), nullable=False),
     sa.Column('writer_id', sa.Integer(), nullable=True),
-    sa.Column('accomodations_id', sa.Integer(), nullable=True),
+    sa.Column('accommodation_id', sa.Integer(), nullable=True),
     sa.Column('rating', sa.Integer(), nullable=True),
     sa.Column('comment', sa.String(), nullable=True),
-    sa.ForeignKeyConstraint(['accomodations_id'], ['accommodations.accommodation_id'], name=op.f('fk_Review_accomodations_id_accommodations')),
+    sa.ForeignKeyConstraint(['accommodation_id'], ['rentals.rental_id'], name=op.f('fk_Review_accommodation_id_rentals')),
     sa.ForeignKeyConstraint(['writer_id'], ['users.user_id'], name=op.f('fk_Review_writer_id_users')),
     sa.PrimaryKeyConstraint('review_id')
     )
     op.create_table('artist_bookings',
     sa.Column('artist_booking_id', sa.Integer(), nullable=False),
     sa.Column('show_id', sa.Integer(), nullable=True),
-    sa.Column('accomodations_id', sa.Integer(), nullable=True),
+    sa.Column('rental_id', sa.Integer(), nullable=True),
     sa.Column('booking_date', sa.Date(), nullable=True),
     sa.Column('accepted', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['accomodations_id'], ['accommodations.accommodation_id'], name=op.f('fk_artist_bookings_accomodations_id_accommodations')),
+    sa.ForeignKeyConstraint(['rental_id'], ['rentals.rental_id'], name=op.f('fk_artist_bookings_rental_id_rentals')),
     sa.ForeignKeyConstraint(['show_id'], ['shows.show_id'], name=op.f('fk_artist_bookings_show_id_shows')),
     sa.PrimaryKeyConstraint('artist_booking_id')
     )
@@ -75,6 +75,6 @@ def downgrade():
     op.drop_table('artist_bookings')
     op.drop_table('Review')
     op.drop_table('shows')
-    op.drop_table('accommodations')
+    op.drop_table('rentals')
     op.drop_table('users')
     # ### end Alembic commands ###
