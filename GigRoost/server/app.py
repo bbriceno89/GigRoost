@@ -1,7 +1,27 @@
-from flask import Flask, jsonify, request, abort
+from flask import Flask, jsonify, request, abort, make_response, session
+from flask_restful import Resource
 from models import User
 from config import app, db, api
 
+
+# Route to Sign Up (post user)
+class Signup(Resource):
+    def post(self):
+        try:
+            data = request.get_json()
+            new_user = User(
+                username = data['username'],
+                account_type = data['account_type']
+            )
+            new_user.password_hash = data['password']
+            db.session.add(new_user)
+            db.session.commit()
+            session['user_id'] = new_user.user_id
+            return make_response(new_user.to_dict(), 201)
+        except:
+            return make_response({'errors':['validation errors']}, 400)
+        
+api.add_resource(Signup, '/signup')
 
 # Route to get all reviews
 @app.route('/reviews', methods=['GET'])
