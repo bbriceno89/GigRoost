@@ -130,4 +130,4 @@ def delete_accommodation(accommodation_id):
     return jsonify({'message': 'Accommodation deleted successfully.'})
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5555, debug=True)
