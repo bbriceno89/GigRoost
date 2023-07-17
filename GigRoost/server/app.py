@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, abort
-from models import db, models
+from models import models
+from config import app, db, api
 
-app = Flask(__name__)
 
 # Route to get all reviews
 @app.route('/reviews', methods=['GET'])
@@ -48,13 +48,6 @@ def get_all_shows():
     return jsonify([show.__dict__ for show in shows])
 
 
-if __name__ == '__main__':
-    app.run()
-
-from flask import Flask, jsonify, request, abort
-from models import db, Base, models
-
-app = Flask(__name__)
 
 # ... Other configurations for Flask and SQLAlchemy ...
 
