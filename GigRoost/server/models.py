@@ -2,7 +2,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.orm import validates
 
-from config import db, Bcrypt
+from config import db, bcrypt
 
 convention = {
     "ix": "ix_%(column_0_label)s",
@@ -11,10 +11,6 @@ convention = {
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
     "pk": "pk_%(table_name)s"
 }
-
-metadata = MetaData(naming_convention=convention)
-
-db = SQLAlchemy(metadata=metadata)
 
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
