@@ -4,7 +4,7 @@ from models import User, Show, Accommodation, ArtistBooking, Review
 from config import app, db, api
 
 
-# Route to Sign Up (post user)
+
 class Signup(Resource):
     def post(self):
         try:
@@ -36,6 +36,7 @@ class Login(Resource):
 
         
 api.add_resource(Signup, '/signup')
+api.add_resource(Login, '/login')
 
 # Route to get all reviews
 @app.route('/reviews', methods=['GET'])
