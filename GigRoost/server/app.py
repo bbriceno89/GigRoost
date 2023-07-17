@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request, abort, make_response, session
 from flask_restful import Resource
-from models import User, Show, Accommodation, ArtistBooking, Review
+from models import User, Show, Rental, ArtistBooking, Review
 from config import app, db, api
 
 
@@ -99,15 +99,15 @@ def get_all_shows():
 
 # ... Other configurations for Flask and SQLAlchemy ...
 
-# Route to get all accommodations
-@app.route('/accommodations', methods=['GET'])
-def get_all_accommodations():
-    accommodations = Accommodation.query.all()
-    return jsonify([a.__dict__ for a in accommodations])
+# Route to get all rentals
+@app.route('/rentals', methods=['GET'])
+def get_all_rentals():
+    rentals = Rental.query.all()
+    return jsonify([a.__dict__ for a in rentals])
 
 # Route to create a new accommodation
-@app.route('/accommodations', methods=['POST'])
-def create_accommodation():
+@app.route('/rentals', methods=['POST'])
+def create_rental():
     data = request.json
 
 # Extract data from the request JSON
@@ -122,7 +122,7 @@ def create_accommodation():
     if not location or not beds or not baths or not sq_ft or not description or not availability_dates:
         return jsonify({'error': 'Please provide all required fields.'}), 400
 
-    accommodation = Accommodation(
+    rental = Rental(
         location=location,
         beds=beds,
         baths=baths,
@@ -131,51 +131,51 @@ def create_accommodation():
         availability_dates=availability_dates
     )
 
-    db.session.add(accommodation)
+    db.session.add(rental)
     db.session.commit()
 
-    return jsonify({'message': 'Accommodation created successfully.'}), 201
+    return jsonify({'message': 'Rental created successfully.'}), 201
 
 # Route to get a specific accommodation
-@app.route('/accommodations/<int:accommodation_id>', methods=['GET'])
-def get_accommodation(accommodation_id):
-    accommodation = Accommodation.query.get(accommodation_id)
+@app.route('/rental/<int:rental_id>', methods=['GET'])
+def get_rental(rental_id):
+    rental = Rental.query.get(rental_id)
 
-    if not accommodation:
-        return jsonify({'error': 'Accommodation not found.'}), 404
+    if not rental:
+        return jsonify({'error': 'Rental not found.'}), 404
 
-    return jsonify(accommodation.__dict__)
+    return jsonify(rental.__dict__)
 
-# Route to partially update an existing accommodation using PATCH
-@app.route('/accommodations/<int:accommodation_id>', methods=['PATCH'])
-def patch_accommodation(accommodation_id):
-    accommodation = Accommodation.query.get(accommodation_id)
+# Route to partially update an existing rental using PATCH
+@app.route('/rentals/<int:rental_id>', methods=['PATCH'])
+def patch_rental(rental_id):
+    rental = Rental.query.get(rental_id)
 
-    if not accommodation:
-        return jsonify({'error': 'Accommodation not found.'}), 404
+    if not rental:
+        return jsonify({'error': 'Rental not found.'}), 404
 
     data = request.json
 
-# Update the accommodation fields with the new data
+# Update the rental fields with the new data
     for key, value in data.items():
-        setattr(accommodation, key, value)
+        setattr(rental, key, value)
 
     db.session.commit()
 
-    return jsonify({'message': 'Accommodation updated successfully.'})
+    return jsonify({'message': 'Rental updated successfully.'})
 
-# Route to delete an accommodation
-@app.route('/accommodations/<int:accommodation_id>', methods=['DELETE'])
-def delete_accommodation(accommodation_id):
-    accommodation = Accommodation.query.get(accommodation_id)
+# Route to delete an rental
+@app.route('/rentals/<int:rental_id>', methods=['DELETE'])
+def delete_rental(rental_id):
+    rental = Rental.query.get(rental_id)
 
-    if not accommodation:
-        return jsonify({'error': 'Accommodation not found.'}), 404
+    if not rental:
+        return jsonify({'error': 'Rental not found.'}), 404
 
-    db.session.delete(accommodation)
+    db.session.delete(rental)
     db.session.commit()
 
-    return jsonify({'message': 'Accommodation deleted successfully.'})
+    return jsonify({'message': 'Rental deleted successfully.'})
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
