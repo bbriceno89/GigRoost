@@ -1,11 +1,9 @@
 from flask import Flask, jsonify, request, abort
 from models import db, models
 
-
 app = Flask(__name__)
 
 # ... Other configurations for Flask and SQLAlchemy ...
-
 
 # Route to get all accommodations
 @app.route('/accommodations', methods=['GET'])
@@ -54,9 +52,9 @@ def get_accommodation(accommodation_id):
 
     return jsonify(accommodation.__dict__)
 
-# Route to update an existing accommodation
-@app.route('/accommodations/<int:accommodation_id>', methods=['PUT'])
-def update_accommodation(accommodation_id):
+# Route to partially update an existing accommodation using PATCH
+@app.route('/accommodations/<int:accommodation_id>', methods=['PATCH'])
+def patch_accommodation(accommodation_id):
     accommodation = models.Accommodation.query.get(accommodation_id)
 
     if not accommodation:
@@ -84,7 +82,6 @@ def delete_accommodation(accommodation_id):
     db.session.commit()
 
     return jsonify({'message': 'Accommodation deleted successfully.'})
-
 
 if __name__ == '__main__':
     app.run()
