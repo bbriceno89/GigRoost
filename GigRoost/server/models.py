@@ -2,8 +2,6 @@ from sqlalchemy import create_engine, Column, Integer, Text, ForeignKey, Date, B
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
-
-
 Base = declarative_base()
 
 
@@ -47,18 +45,6 @@ class Show(Base):
 
     # relationships
     artist = relationship('User', backref='shows')
-
-   
-
-
-
-
-
-
-    from sqlalchemy import Column, Integer, String, Float, Date, ForeignKey
-from sqlalchemy.orm import relationship
-from path_to_jacob_ives_models import User
-from path_to_beau_becinios_models import Review, ArtistBooking, Show
 
 class Accommodation(Base):
     __tablename__ = 'accommodation'
