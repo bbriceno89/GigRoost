@@ -4,7 +4,6 @@ from flask_migrate import Migrate
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
-from key import secret_key
 
 app = Flask(__name__)
 app.secret_key = b'\xed\xde\xa1\xd5\xe7\x05\xc5\x94\x8dG\xb4cy\x16VH\xdf\xa7\x9e\x8b\xcb\x82\xe6Q'
