@@ -15,11 +15,11 @@ class Accommodation(Base):
     description = Column(String)
     availability_dates = Column(Date)
 
-    # Establish a bidirectional relationship between User and Accommodation
+# Establish a bidirectional relationship between User and Accommodation
     host = relationship(User, back_populates="accommodations")
 
-    # Establish a one-to-many relationship between Accommodation and Review
+# Establish a one-to-many relationship between Accommodation and Review
     reviews = relationship(Review, backref="accommodation")
 
-    # Establish a one-to-many relationship between Accommodation and ArtistBooking
+# Establish a one-to-many relationship between Accommodation and ArtistBooking
     artist_bookings = relationship(ArtistBooking, backref="accommodation")

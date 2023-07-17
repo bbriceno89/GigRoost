@@ -16,7 +16,7 @@ def get_all_accommodations():
 def create_accommodation():
     data = request.json
 
-    # Extract data from the request JSON
+# Extract data from the request JSON
     location = data.get('location')
     beds = data.get('beds')
     baths = data.get('baths')
@@ -24,7 +24,7 @@ def create_accommodation():
     description = data.get('description')
     availability_dates = data.get('availability_dates')
 
-    # Perform some basic validation on the input data, you can add more checks as per your requirements.
+# Perform some basic validation on the input data, you can add more checks as per your requirements.
     if not location or not beds or not baths or not sq_ft or not description or not availability_dates:
         return jsonify({'error': 'Please provide all required fields.'}), 400
 
@@ -62,7 +62,7 @@ def patch_accommodation(accommodation_id):
 
     data = request.json
 
-    # Update the accommodation fields with the new data
+# Update the accommodation fields with the new data
     for key, value in data.items():
         setattr(accommodation, key, value)
 
