@@ -29,19 +29,18 @@ class User(db.Model, SerializerMixin):
 
     # Review Model
 class Review(db.Model, SerializerMixin):
-    __tablename__ = 'Review'
+    __tablename__ = 'reviews'
 
-    serialize_rules = ('-user.reviews','-accommodation.reviews_received')
-   
+    serialize_rules = ('-user.reviews','-rental.reviews')
+
     review_id = db.Column(db.Integer, primary_key=True)
     writer_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    accomodations_id = db.Column(db.Integer, db.ForeignKey('accommodations.accommodation_id'))
+    accommodation_id = db.Column(db.Integer, db.ForeignKey('rentals.rental_id'))
     rating = db.Column(db.Integer)
     comment = db.Column(db.String)
-
     #relationships
     writer = db.relationship('User', backref='reviews')
-    accommodation = db.relationship('Accommodation', backref='reviews_received')
+    rental = db.relationship('Rental', backref='reviews')
 
 
     # ArtistBooking Model
@@ -49,18 +48,17 @@ class Review(db.Model, SerializerMixin):
 class ArtistBooking(db.Model, SerializerMixin):
     __tablename__ = 'artist_bookings'
 
-    serialize_rules= ('-show.artist_bookings', '-accommodation.bookings_accommodation')
+    serialize_rules= ('-show.artist_bookings', '-rental.artist_bookings')
 
     artist_booking_id = db.Column(db.Integer, primary_key=True)
     show_id = db.Column(db.Integer, db.ForeignKey('shows.show_id'))
-    accomodations_id = db.Column(db.Integer, db.ForeignKey('accommodations.accommodation_id'))
+    rental_id = db.Column(db.Integer, db.ForeignKey('rentals.rental_id'))
     booking_date = db.Column(db.Date)
     accepted = db.Column(db.Integer) # 0 for false, 1 for true
 
     # relationships
     show = db.relationship('Show', backref='artist_bookings')
-    accommodation = db.relationship('Accommodation', backref='bookings_accommodation')
-
+    rental = db.relationship('Rental', backref='artist_bookings')
 
 
     #Show Model
@@ -78,26 +76,19 @@ class Show(db.Model, SerializerMixin):
     # relationships
     artist = db.relationship('User', backref='shows')
 
-class Accommodation(db.Model, SerializerMixin):
-    __tablename__ = 'accommodations'
-    
-    serialize_rules = ('-host.accommodations','-reviews_accommodation', '-artist_bookings.accommodation')
+class Rental(db.Model, SerializerMixin):
+    __tablename__ = 'rentals'
 
-    accommodation_id = db.Column(db.Integer, primary_key=True)
+    serialize_rules= ('-host.rentals','-review.rental', '-artist_bookings.rental')
+
+    rental_id = db.Column(db.Integer, primary_key=True)
     host_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     location = db.Column(db.String)
     beds = db.Column(db.Integer)
     baths = db.Column(db.Float)
     sq_ft = db.Column(db.Integer)
     description = db.Column(db.String)
-    availability_dates = db.Column(db.Date)
+    availability_dates = db.Column(db.String)
 
-    # Establish a relationship between User and Accommodation
-    host = db.relationship("User", backref="accommodations")
-
-    # Establish a one-to-many relationship between Accommodation and Review
-    reviews_accommodation = db.relationship("Review", backref="reviews_received")
-
-    # Establish a one-to-many relationship between Accommodation and ArtistBooking
-    artist_bookings = db.relationship("ArtistBooking", backref="bookings_received")
-
+# Establish a relationship between User and Rental
+    host = db.relationship("User", backref="rentals")
