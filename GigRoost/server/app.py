@@ -117,6 +117,7 @@ def create_rental():
     sq_ft = data.get('sq_ft')
     description = data.get('description')
     availability_dates = data.get('availability_dates')
+    image_url = data.get('image_url')
 
 # Perform some basic validation on the input data, you can add more checks as per your requirements.
     if not location or not beds or not baths or not sq_ft or not description or not availability_dates:
@@ -128,6 +129,7 @@ def create_rental():
         baths=baths,
         sq_ft=sq_ft,
         description=description,
+        image_url = image_url,
         availability_dates=availability_dates
     )
 
