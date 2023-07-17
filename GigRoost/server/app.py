@@ -103,7 +103,7 @@ def get_all_shows():
 @app.route('/rentals', methods=['GET'])
 def get_all_rentals():
     rentals = Rental.query.all()
-    return jsonify([a.__dict__ for a in rentals])
+    return make_response([rental.to_dict() for rental in rentals], 200)
 
 # Route to create a new accommodation
 @app.route('/rentals', methods=['POST'])
