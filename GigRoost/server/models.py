@@ -29,7 +29,7 @@ class User(db.Model, SerializerMixin):
 
     # Review Model
 class Review(db.Model, SerializerMixin):
-    __tablename__ = 'Review'
+    __tablename__ = 'reviews'
 
     serialize_rules = ('-user.reviews','-rental.reviews')
 
@@ -38,7 +38,6 @@ class Review(db.Model, SerializerMixin):
     accommodation_id = db.Column(db.Integer, db.ForeignKey('rentals.rental_id'))
     rating = db.Column(db.Integer)
     comment = db.Column(db.String)
-
     #relationships
     writer = db.relationship('User', backref='reviews')
     rental = db.relationship('Rental', backref='reviews')

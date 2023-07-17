@@ -9,12 +9,10 @@ class Signup(Resource):
     def post(self):
         # try:
             data = request.get_json()
-            print(data['username'], data['password'], data['account_type'])
             new_user = User(
                 username = data['username'],
                 account_type = data['account_type']
             )
-            print(new_user.username)
             new_user.password_hash = data['password']
             db.session.add(new_user)
             db.session.commit()
@@ -29,7 +27,9 @@ class Login(Resource):
         user = User.query.filter(User.username == data['username']).first()
         if user:
             if user.authenticate(data['password']):
-                session['user_id'] = user.id
+                print(user.username)
+                print(user.user_id)
+                session['user_id'] = user.user_id
                 return user.to_dict(), 201
             else:
                 return {"error": "Invalid Password"}, 401
