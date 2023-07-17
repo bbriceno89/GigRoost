@@ -1,5 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, Date, ForeignKey
 from sqlalchemy.orm import relationship
+from path_to_jacob_ives_models import User
+from path_to_beau_becinios_models import Review, ArtistBooking, Show
 
 class Accommodation(Base):
     __tablename__ = 'accommodation'
@@ -14,4 +16,10 @@ class Accommodation(Base):
     availability_dates = Column(Date)
 
     # Establish a bidirectional relationship between User and Accommodation
-    host = relationship("User", back_populates="accommodations")
+    host = relationship(User, back_populates="accommodations")
+
+    # Establish a one-to-many relationship between Accommodation and Review
+    reviews = relationship(Review, backref="accommodation")
+
+    # Establish a one-to-many relationship between Accommodation and ArtistBooking
+    artist_bookings = relationship(ArtistBooking, backref="accommodation")

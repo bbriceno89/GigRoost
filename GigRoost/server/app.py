@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request, abort
-from models import db, models
+from models import db, Base, models
 
 app = Flask(__name__)
 
