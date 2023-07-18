@@ -2,7 +2,11 @@ import React from "react";
 
 function ChooseAccount(){
     return(
-        <p>Choose Account</p>
+        <>
+            <p>Choose Account Type:</p>
+            <button>Host</button>
+            <button>Artist</button>
+        </>
     )
 }
 
