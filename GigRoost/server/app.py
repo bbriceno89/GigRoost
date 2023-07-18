@@ -80,20 +80,20 @@ def delete_review(review_id):
         abort(404)
     db.session.delete(review)
     db.session.commit()
-    return jsonify({'result': True})
+    return make_response({'message': "review deleted successfully"}, 204)
 
 
 # Route to get all artist bookings
-@app.route('/artist_bookings', methods=['GET'])
-def get_all_artist_bookings():
+@app.route('/bookings', methods=['GET'])
+def get_all_bookings():
     artist_bookings = ArtistBooking.query.all()
-    return jsonify([a.__dict__ for a in artist_bookings])
+    return jsonify([booking.to_dict() for booking in artist_bookings])
 
 # Route to get all shows
 @app.route('/shows', methods=['GET'])
 def get_all_shows():
     shows = Show.query.all()
-    return jsonify([show.__dict__ for show in shows])
+    return jsonify([show.to_dict() for show in shows])
 
 
 
