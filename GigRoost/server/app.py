@@ -55,7 +55,7 @@ api.add_resource(Logout, '/logout')
 @app.route('/reviews', methods=['GET'])
 def get_all_reviews():
     reviews = Review.query.all()
-    return jsonify([review.__dict__ for review in reviews])
+    return make_response([review.to_dict() for review in reviews], 200)
 
 # Route to Post a review
 @app.route('/reviews', methods=['POST'])

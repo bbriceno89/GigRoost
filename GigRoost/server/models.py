@@ -31,7 +31,7 @@ class User(db.Model, SerializerMixin):
 class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews'
 
-    serialize_rules = ('-user.reviews','-rental.reviews')
+    serialize_rules = ('-writer.reviews','-rental.reviews')
 
     review_id = db.Column(db.Integer, primary_key=True)
     writer_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
