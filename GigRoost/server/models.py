@@ -35,7 +35,7 @@ class Review(db.Model, SerializerMixin):
 
     review_id = db.Column(db.Integer, primary_key=True)
     writer_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    accommodation_id = db.Column(db.Integer, db.ForeignKey('rentals.rental_id'))
+    rental_id = db.Column(db.Integer, db.ForeignKey('rentals.rental_id'))
     rating = db.Column(db.Integer)
     comment = db.Column(db.String)
     #relationships

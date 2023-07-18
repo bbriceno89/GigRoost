@@ -64,13 +64,13 @@ def post_review():
         abort(400)
     review = Review(
         writer_id=request.json['writer_id'],
-        accomodations_id=request.json['accomodations_id'],
+        rental_id=request.json['rental_id'],
         rating=request.json['rating'],
         comment=request.json['comment']
     )
     db.session.add(review)
     db.session.commit()
-    return jsonify(review.__dict__), 201
+    return make_response(review.to_dict(), 201)
 
 #Route to delete a review
 @app.route('/reviews/<int:review_id>', methods=['DELETE'])
