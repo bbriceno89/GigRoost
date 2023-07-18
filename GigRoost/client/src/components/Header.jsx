@@ -4,7 +4,14 @@ import NavBar from "./NavBar";
 function Header() {
   return (
     <>
-      <h1 className=" text-left w-screen h-14 bg-pallette1 text-2xl text-pallette6 font-bold px-2 py-4">
+      <h1 
+      className="bg-pallette1 
+      text-left 
+      text-pallette6 
+      text-3xl 
+      font-bold 
+      w-screen h-14 
+      px-2 py-4">
         GigRoost
       </h1>
       <NavBar />
