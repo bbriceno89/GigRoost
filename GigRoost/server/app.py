@@ -169,7 +169,7 @@ def patch_rental(rental_id):
 # Route to delete an rental
 @app.route('/rentals/<int:rental_id>', methods=['DELETE'])
 def delete_rental(rental_id):
-    rental = Rental.query.get(rental_id)
+    rental = Rental.query.filter(Rental.rental_id == rental_id).first()
 
     if not rental:
         return jsonify({'error': 'Rental not found.'}), 404
@@ -177,7 +177,7 @@ def delete_rental(rental_id):
     db.session.delete(rental)
     db.session.commit()
 
-    return jsonify({'message': 'Rental deleted successfully.'})
+    return make_response({}, 204)
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
