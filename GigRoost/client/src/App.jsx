@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import Header from './components/Header'
-import Welcome from './components/Welcome'
+import { useState } from "react";
+import Header from "./components/Header";
+import Welcome from "./components/Welcome";
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
   return (
-    <div className='w-screen h-screen bg-red-500 '>
+    <div className="w-screen h-screen bg-pallette4">
       <Header />
-      <Welcome/>
+      <Welcome />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    li {
+        @apply list-none font-semibold border-solid hover:bg-pallette3
+    }
 
-
-
-:root {
-  --primary-dark: #111111;
-  --primary-light: #606060;
+    
 }
