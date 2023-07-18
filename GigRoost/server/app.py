@@ -64,7 +64,7 @@ def post_review():
         abort(400)
     review = Review(
         writer_id=request.json['writer_id'],
-        accomodations_id=request.json['accomodations_id'],
+       rental_id=request.json['accomodations_id'],
         rating=request.json['rating'],
         comment=request.json['comment']
     )
@@ -178,4 +178,6 @@ def delete_rental(rental_id):
     return jsonify({'message': 'Rental deleted successfully.'})
 
 if __name__ == '__main__':
+    # Set the environment to 'production' when running the main application
+    app.env = 'production'
     app.run(port=5555, debug=True)

@@ -35,7 +35,7 @@ class Review(db.Model, SerializerMixin):
 
     review_id = db.Column(db.Integer, primary_key=True)
     writer_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    accommodation_id = db.Column(db.Integer, db.ForeignKey('rentals.rental_id'))
+    rental_id = db.Column(db.Integer, db.ForeignKey('rentals.rental_id'))
     rating = db.Column(db.Integer)
     comment = db.Column(db.String)
     #relationships
@@ -68,13 +68,15 @@ class Show(db.Model, SerializerMixin):
     serialize_rules= ('-artist.shows', '-artist_bookings.show')
 
     show_id = db.Column(db.Integer, primary_key=True)
-    artist_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    artist_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))  # Corrected field name
     bandmates = db.Column(db.Integer)
     location = db.Column(db.String)
     genre = db.Column(db.String)
 
     # relationships
     artist = db.relationship('User', backref='shows')
+
+
 
 class Rental(db.Model, SerializerMixin):
     __tablename__ = 'rentals'

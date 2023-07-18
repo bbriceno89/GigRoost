@@ -1,88 +1,105 @@
-# from flask import Flask
-# from config import app, db
-# from models import User, Accommodation, Review, ArtistBooking, Show
-# from faker import Faker
-# import random
+from flask import Flask
+from config import app, db
+from models import User, Rental, Review, ArtistBooking, Show
+from faker import Faker
+import random
 
-# fake = Faker()
 
-# # Create functions to generate fake data for each model
+fake = Faker()
 
-# def create_fake_accommodations(num_accommodations, num_hosts):
-#     hosts = User.query.filter_by(account_type='normal').limit(num_hosts).all()
+# Create functions to generate fake data for each model
 
-#     for _ in range(num_accommodations):
-#         accommodation = Accommodation(
-#             host=random.choice(hosts),
-#             location=fake.city(),
-#             beds=random.randint(1, 5),
-#             baths=random.uniform(1, 3),
-#             sq_ft=random.randint(500, 2000),
-#             description=fake.text(),
-#             availability_dates=fake.date_between(start_date='-1y', end_date='+1y')
-#         )
-#         db.session.add(accommodation)
+def create_fake_users(num_users):
+    for _ in range(num_users):
+        account_type = random.choice(['artist', 'host'])
+        username = fake.user_name()
+        user = User(
+            username=username,
+            account_type=account_type
+            # Add other required user fields here
+        )
+        db.session.add(user)
+    
+    # Commit the changes to the database after creating all users
+    db.session.commit()
 
-# def create_fake_reviews(num_reviews, num_users, num_accommodations):
-#     users = User.query.filter_by(account_type='normal').limit(num_users).all()
-#     accommodations = Accommodation.query.limit(num_accommodations).all()
+def create_fake_rentals(num_rentals):
+    for _ in range(num_rentals):
+        rental = Rental(
+            location=fake.city(),
+            beds=random.randint(1, 5),
+            baths=random.uniform(1, 3),
+            sq_ft=random.randint(500, 2000),
+            description=fake.text(),
+            availability_dates=fake.date_between(start_date='-1y', end_date='+1y')
+        )
+        db.session.add(rental)
 
-#     for _ in range(num_reviews):
-#         review = Review(
-#             writer=random.choice(users),
-#             accommodation=random.choice(accommodations),
-#             rating=random.randint(1, 5),
-#             comment=fake.paragraph()
-#         )
-#         db.session.add(review)
+def create_fake_reviews(num_reviews, num_users, num_rentals):
+    # Generate fake users
+    create_fake_users(num_users)
 
-# def create_fake_shows(num_shows, num_artists):
-#     artists = User.query.filter_by(account_type='premium').limit(num_artists).all()
+    users = User.query.filter(User.account_type.in_(['artist', 'host'])).limit(num_users).all()
+    rentals = Rental.query.limit(num_rentals).all()
 
-#     for _ in range(num_shows):
-#         show = Show(
-#             artist=random.choice(artists),
-#             bandmates=random.randint(1, 5),
-#             location=fake.city(),
-#             genre=random.choice(['rock', 'pop', 'jazz', 'hip-hop', 'country'])
-#         )
-#         db.session.add(show)
+    for _ in range(num_reviews):
+        review = Review(
+            writer=random.choice(users),
+            rental=random.choice(rentals),
+            rating=random.randint(1, 5),
+            comment=fake.paragraph()
+        )
+        db.session.add(review)
 
-# def create_fake_artist_bookings(num_bookings, num_shows, num_accommodations):
-#     shows = Show.query.limit(num_shows).all()
-#     accommodations = Accommodation.query.limit(num_accommodations).all()
+def create_fake_shows(num_shows, num_artists):
+    artists = User.query.filter_by(account_type='artist').limit(num_artists).all()
 
-#     for _ in range(num_bookings):
-#         booking = ArtistBooking(
-#             show=random.choice(shows),
-#             accommodation=random.choice(accommodations),
-#             booking_date=fake.date_between(start_date='-1y', end_date='+1y'),
-#             accepted=random.choice([0, 1])
-#         )
-#         db.session.add(booking)
+    if not artists:
+        print("Error: No artists found. Make sure you have users with account_type 'artist' in the database.")
+        return
 
-# # Function to seed the database
-# def seed_database():
-#     with app.app_context():
-#         db.create_all()
+    for _ in range(num_shows):
+        show = Show(
+            artist=random.choice(artists),
+            bandmates=random.randint(1, 5),
+            location=fake.city(),
+            genre=random.choice(['rock', 'pop', 'jazz', 'hip-hop', 'country'])
+        )
+        db.session.add(show)
 
-#         # Customize the number of fake entries you want for each model
-        
-#         num_accommodations = 20
-#         num_reviews = 50
-#         num_shows = 30
-#         num_artists = 15
-#         num_artist_bookings = 40
-#         num_hosts = 5
+def create_fake_artist_bookings(num_bookings, num_shows, num_rentals):
+    shows = Show.query.limit(num_shows).all()
+    rentals = Rental.query.limit(num_rentals).all()
 
-        
-#         create_fake_accommodations(num_accommodations, num_hosts)
-#         create_fake_reviews(num_reviews, num_users, num_accommodations)
-#         create_fake_shows(num_shows, num_artists)
-#         create_fake_artist_bookings(num_artist_bookings, num_shows, num_accommodations)
+    for _ in range(num_bookings):
+        booking = ArtistBooking(
+            show=random.choice(shows),
+            rental=random.choice(rentals),
+            booking_date=fake.date_between(start_date='-1y', end_date='+1y'),
+            accepted=random.choice([0, 1])
+        )
+        db.session.add(booking)
 
-#         db.session.commit()
+# Function to seed the database
+def seed_database():
+    with app.app_context():
+        db.create_all()
 
-# if __name__ == '__main__':
-#     seed_database()
-#     print("Database seeded successfully!")
+        num_rentals = 20
+        num_reviews = 50
+        num_users = 30  # Add this line and adjust the value as needed
+        num_shows = 30
+        num_artists = 15
+        num_artist_bookings = 40
+       
+        create_fake_rentals(num_rentals)
+        create_fake_users(num_users)  # Moved this function call to generate users first
+        create_fake_reviews(num_reviews, num_users, num_rentals)
+        create_fake_shows(num_shows, num_artists)
+        create_fake_artist_bookings(num_artist_bookings, num_shows, num_rentals)
+
+        db.session.commit()
+
+if __name__ == '__main__':
+    seed_database()
+    print("Database seeded successfully!")

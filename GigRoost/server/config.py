@@ -1,3 +1,5 @@
+# config.py
+
 import os
 from flask import Flask
 from flask_bcrypt import Bcrypt
@@ -8,18 +10,18 @@ from sqlalchemy import MetaData
 
 app = Flask(__name__)
 app.secret_key = b'\xed\xde\xa1\xd5\xe7\x05\xc5\x94\x8dG\xb4cy\x16VH\xdf\xa7\x9e\x8b\xcb\x82\xe6Q'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 
 # Set the base directory of your project
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # SQLite database for testing purposes
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'test.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.db')  # Use app.db for the application
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 
 app.config['SQLALCHEMY_BINDS'] = {
-    'production': 'sqlite:///' + os.path.join(basedir, 'prod.db')
+    'production': 'sqlite:///' + os.path.join(basedir, 'prod.db')  # Use prod.db for the production environment
 }
 
 metadata = MetaData(naming_convention={
