@@ -31,7 +31,7 @@ class User(db.Model, SerializerMixin):
 class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews'
 
-    serialize_rules = ('-user.reviews','-rental.reviews')
+    serialize_rules = ('-writer.reviews','-writer._password_hash','-writer.account_type','-writer.rentals','-writer.shows' ,'-rental.reviews')
 
     review_id = db.Column(db.Integer, primary_key=True)
     writer_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
@@ -81,7 +81,7 @@ class Show(db.Model, SerializerMixin):
 class Rental(db.Model, SerializerMixin):
     __tablename__ = 'rentals'
 
-    serialize_rules= ('-host.rentals','-review.rental', '-artist_bookings.rental')
+    serialize_rules= ('-host.rentals','-reviews.rental', '-artist_bookings.rental')
 
     rental_id = db.Column(db.Integer, primary_key=True)
     host_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
@@ -90,6 +90,7 @@ class Rental(db.Model, SerializerMixin):
     baths = db.Column(db.Float)
     sq_ft = db.Column(db.Integer)
     description = db.Column(db.String)
+    image_url = db.Column(db.String)
     availability_dates = db.Column(db.String)
 
 # Establish a relationship between User and Rental

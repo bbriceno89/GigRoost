@@ -23,8 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
-# secret key for encryption
-key.py
-
-# Ignore the db.json file
-db.json
+# Databases
+*.db
