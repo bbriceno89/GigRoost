@@ -80,7 +80,7 @@ class Show(db.Model, SerializerMixin):
 class Rental(db.Model, SerializerMixin):
     __tablename__ = 'rentals'
 
-    serialize_rules= ('-host.rentals','-review.rental', '-artist_bookings.rental')
+    serialize_rules= ('-host.rentals','-reviews.rental', '-artist_bookings.rental')
 
     rental_id = db.Column(db.Integer, primary_key=True)
     host_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))

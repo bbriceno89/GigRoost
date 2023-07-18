@@ -87,13 +87,13 @@ def delete_review(review_id):
 @app.route('/bookings', methods=['GET'])
 def get_all_bookings():
     artist_bookings = ArtistBooking.query.all()
-    return jsonify([booking.to_dict() for booking in artist_bookings])
+    return make_response([booking.to_dict() for booking in artist_bookings], 200)
 
 # Route to get all shows
 @app.route('/shows', methods=['GET'])
 def get_all_shows():
     shows = Show.query.all()
-    return jsonify([show.to_dict() for show in shows])
+    return make_response([show.to_dict() for show in shows], 200)
 
 
 
@@ -136,25 +136,25 @@ def create_rental():
     db.session.add(rental)
     db.session.commit()
 
-    return jsonify({'message': 'Rental created successfully.'}), 201
+    return make_response({'message': 'Rental created successfully.'}, 201)
 
 # Route to get a specific accommodation
-@app.route('/rental/<int:rental_id>', methods=['GET'])
+@app.route('/rentals/<int:rental_id>', methods=['GET'])
 def get_rental(rental_id):
-    rental = Rental.query.get(rental_id)
+    rental = Rental.query.filter(Rental.rental_id == rental_id).first()
 
     if not rental:
-        return jsonify({'error': 'Rental not found.'}), 404
+        return make_response({'error': 'Rental not found.'}, 404)
 
-    return jsonify(rental.__dict__)
+    return make_response(rental.to_dict(), 200)
 
 # Route to partially update an existing rental using PATCH
 @app.route('/rentals/<int:rental_id>', methods=['PATCH'])
 def patch_rental(rental_id):
-    rental = Rental.query.get(rental_id)
+    rental = Rental.query.filter(Rental.rental_id == rental_id).first()
 
     if not rental:
-        return jsonify({'error': 'Rental not found.'}), 404
+        return make_response({'error': 'Rental not found.'}, 404)
 
     data = request.json
 
@@ -164,7 +164,7 @@ def patch_rental(rental_id):
 
     db.session.commit()
 
-    return jsonify({'message': 'Rental updated successfully.'})
+    return make_response(rental.to_dict(), 202)
 
 # Route to delete an rental
 @app.route('/rentals/<int:rental_id>', methods=['DELETE'])
