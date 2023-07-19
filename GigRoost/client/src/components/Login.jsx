@@ -12,7 +12,6 @@ function Login() {
     }
     function handleSubmit(e) {
       e.preventDefault();
-      console.log(formData)
       fetch('/api/login', {
         method: "POST",
         headers: {
