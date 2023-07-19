@@ -106,11 +106,6 @@ class Rental(db.Model, SerializerMixin):
             'description': self.description,
             'image_url': self.image_url,
             'availability_dates': self.availability_dates,
-            # Exclude circular references, for example:
-            # 'host': self.host.to_dict() if self.host else None,
-            # 'reviews': [review.to_dict() for review in self.reviews],
-            # 'artist_bookings': [booking.to_dict() for booking in self.artist_bookings],
-            # Add other attributes as needed
         }
         return rental_data
 
