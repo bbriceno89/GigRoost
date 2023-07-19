@@ -68,113 +68,101 @@ class Review_id(Resource):
     def delete(self, id):
         review = Review.query.filter(Review.review_id == id).first()
         if not review:
-            abort(404)
+            return make_response({"error": "Review does not exist"}, 404)
         db.session.delete(review)
         db.session.commit()
         return make_response({}, 204)
 
-        
+class Bookings(Resource):
+    def get(self):
+        artist_bookings = ArtistBooking.query.all()
+        return make_response([booking.to_dict() for booking in artist_bookings], 200)
+
+class Shows(Resource):
+    def get(self):
+        shows = Show.query.all()
+        return make_response([show.to_dict() for show in shows], 200)
+
+class Rentals(Resource):
+    def get(self):
+        rentals = Rental.query.all()
+        return make_response([rental.to_dict() for rental in rentals], 200)
+    def post(self):
+        data = request.get_json()
+
+    # Extract data from the request JSON
+        location = data['location']
+        beds = data['beds']
+        baths = data['baths']
+        sq_ft = data['sq-ft']
+        description = data['description']
+        availability_dates = data['availability_dates']
+        image_url = data['image_url']
+
+    # Perform some basic validation on the input data, you can add more checks as per your requirements.
+        if not location or not beds or not baths or not sq_ft or not description or not availability_dates:
+            return jsonify({'error': 'Please provide all required fields.'}), 400
+
+        rental = Rental(
+            location=location,
+            beds=beds,
+            baths=baths,
+            sq_ft=sq_ft,
+            description=description,
+            image_url = image_url,
+            availability_dates=availability_dates
+        )
+
+        db.session.add(rental)
+        db.session.commit()
+
+        return make_response({'message': 'Rental created successfully.'}, 201)
+
+class Rental_id(Resource):
+    def get(self, id):
+        rental = Rental.query.filter(Rental.rental_id == rental_id).first()
+
+        if not rental:
+            return make_response({'error': 'Rental not found.'}, 404)
+
+        return make_response(rental.to_dict(), 200)
+    def patch(self, id):
+        rental = Rental.query.filter(Rental.rental_id == id).first()
+
+        if not rental:
+            return make_response({'error': 'Rental not found.'}, 404)
+
+        data = request.get_json()
+
+    # Update the rental fields with the new data
+        for attr in data:
+            setattr(rental, attr, data[attr])
+
+        db.session.commit()
+
+        return make_response(rental.to_dict(), 202)
+    def delete(self, id):
+        rental = Rental.query.filter(Rental.rental_id == id).first()
+
+        if not rental:
+            return make_response({'error': 'Rental not found.'}, 404)
+
+        db.session.delete(rental)
+        db.session.commit()
+
+        return make_response({}, 204)
+
+
 api.add_resource(Signup, '/signup')
 api.add_resource(Login, '/login')
 api.add_resource(Logout, '/logout')
+api.add_resource(Reviews, '/reviews')
+api.add_resource(Review_id, '/reviews/<int:id>')
+api.add_resource(Bookings, '/bookings')
+api.add_resource(Shows, '/shows')
+api.add_resource(Rentals, '/rentals')
+api.add_resource(Rental_id, '/rentals/<int:id>')
 
-
-
-# Route to get all artist bookings
-@app.route('/bookings', methods=['GET'])
-def get_all_bookings():
-    artist_bookings = ArtistBooking.query.all()
-    return make_response([booking.to_dict() for booking in artist_bookings], 200)
-
-# Route to get all shows
-@app.route('/shows', methods=['GET'])
-def get_all_shows():
-    shows = Show.query.all()
-    return make_response([show.to_dict() for show in shows], 200)
-
-
-
-# ... Other configurations for Flask and SQLAlchemy ...
-
-# Route to get all rentals
-@app.route('/rentals', methods=['GET'])
-def get_all_rentals():
-    rentals = Rental.query.all()
-    return make_response([rental.to_dict() for rental in rentals], 200)
-
-# Route to create a new accommodation
-@app.route('/rentals', methods=['POST'])
-def create_rental():
-    data = request.json
-
-# Extract data from the request JSON
-    location = data.get('location')
-    beds = data.get('beds')
-    baths = data.get('baths')
-    sq_ft = data.get('sq_ft')
-    description = data.get('description')
-    availability_dates = data.get('availability_dates')
-    image_url = data.get('image_url')
-
-# Perform some basic validation on the input data, you can add more checks as per your requirements.
-    if not location or not beds or not baths or not sq_ft or not description or not availability_dates:
-        return jsonify({'error': 'Please provide all required fields.'}), 400
-
-    rental = Rental(
-        location=location,
-        beds=beds,
-        baths=baths,
-        sq_ft=sq_ft,
-        description=description,
-        image_url = image_url,
-        availability_dates=availability_dates
-    )
-
-    db.session.add(rental)
-    db.session.commit()
-
-    return make_response({'message': 'Rental created successfully.'}, 201)
-
-# Route to get a specific accommodation
-@app.route('/rentals/<int:rental_id>', methods=['GET'])
-def get_rental(rental_id):
-    rental = Rental.query.filter(Rental.rental_id == rental_id).first()
-
-    if not rental:
-        return make_response({'error': 'Rental not found.'}, 404)
-
-    return make_response(rental.to_dict(), 200)
-
-# Route to partially update an existing rental using PATCH
-@app.route('/rentals/<int:rental_id>', methods=['PATCH'])
-def patch_rental(rental_id):
-    rental = Rental.query.filter(Rental.rental_id == rental_id).first()
-
-    if not rental:
-        return make_response({'error': 'Rental not found.'}, 404)
-
-    data = request.json
-
-# Update the rental fields with the new data
-    for key, value in data.items():
-        setattr(rental, key, value)
-
-    db.session.commit()
-
-    return make_response(rental.to_dict(), 202)
-
-# Route to delete an rental
-@app.route('/rentals/<int:rental_id>', methods=['DELETE'])
-def delete_rental(rental_id):
-    rental = Rental.query.filter(Rental.rental_id == rental_id).first()
-
-    if not rental:
-        return jsonify({'error': 'Rental not found.'}), 404
-
-    db.session.delete(rental)
-    db.session.commit()
-
-    return make_response({}, 204)
 
 if __name__ == '__main__':
     # Set the environment to 'production' when running the main application
