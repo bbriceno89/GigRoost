@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "./context/UserContext";
 
 function Login() {
     const [formData, setFormData] = useState({})
+    const { user, setUser } = useContext(UserContext)
 
     function handleChange(e) {
       const name = e.target.name;
@@ -19,7 +21,7 @@ function Login() {
         body: JSON.stringify(formData)
       })
       .then((r=>r.json()))
-      .then(data=>console.log(data))
+      .then(data=>setUser(data))
     }
 
 

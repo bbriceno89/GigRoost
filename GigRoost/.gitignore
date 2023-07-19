@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # Databases
-*.db
+app.db
