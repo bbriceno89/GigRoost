@@ -48,7 +48,7 @@ class Review(db.Model, SerializerMixin):
 class ArtistBooking(db.Model, SerializerMixin):
     __tablename__ = 'artist_bookings'
 
-    serialize_rules= ('-show.artist_bookings', '-rental.artist_bookings')
+    serialize_rules= ('-show.artist_bookings', '-rental.artist_bookings', '-show.artist', "-rental.reviews")
 
     artist_booking_id = db.Column(db.Integer, primary_key=True)
     show_id = db.Column(db.Integer, db.ForeignKey('shows.show_id'))
