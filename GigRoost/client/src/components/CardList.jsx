@@ -5,11 +5,11 @@ const CardList = () => {
 
   useEffect(() => {
     // Fetch rental items from the server
-    fetch('http://127.0.0.1:5555/rentals?limit=8')
+    fetch('http://127.0.0.1:5555/rentals?limit=4')
       .then((response) => response.json())
       .then((data) => {
-        const first8Items = data.slice(0,8);
-        setRentalItems(first8Items);
+        const first4Items = data.slice(0,4);
+        setRentalItems(first4Items);
       })
       .catch((error) => {
         console.error('Error fetching rental data:', error);
@@ -23,13 +23,13 @@ const CardList = () => {
       </h2>
       <div className="grid grid-cols-2 gap-4">
         {rentalItems.map((item) => (
-          <div key={item.rental_id} className="bg-white p-2 shadow-md">
+          <div key={item.rental_id} className="bg-white p-2 shadow-md card">
             <img
               src={item.image_url || '/fallback-image.jpg'}
               alt={`Rental Item ${item.rental_id}`}
               className="w-full h-36 object-cover mb-2"
             />
-            <p className="text-base text-center" style={{ color: 'black', fontWeight: 'bold' }}>
+            <p className="text-base text-center" style={{ color: 'white', fontWeight: 'bold' }}>
               {item.description}
             </p>
           </div>
