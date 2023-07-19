@@ -1,24 +1,26 @@
 import React from 'react';
+import { useState } from 'react';
+
 
 function Details() {
+    const [rental, SetRental] = useState(null);
+    
 
     return (
     <div>
       <div className="Available Roosts">
-        {/* Availability Calendar or Date Selection Component */}
         <h2>Select Dates:</h2>
-        {/* Include your date selection component here */}
-        {/* e.g., <CalendarComponent /> */}
         <button>Check Availability</button>
       </div>
       <div className="image-container">
-        <img src="apartment-image.jpg" alt="Apartment" />
+        <img src={item.image_url} alt="Apartment" />
       </div>
       <div className="description">
         <h2>Apartment Name/Number</h2>
-        <p>
+        <textarea>
+            {item.description}
           [Apartment Description]
-        </p>
+        </textarea>
       </div>
     </div>
   );
