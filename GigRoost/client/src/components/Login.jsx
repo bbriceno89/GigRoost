@@ -10,7 +10,16 @@ function Login() {
     }
     function handleSubmit(e) {
       e.preventDefault();
-      l
+      console.log(formData)
+      fetch('/api/login', {
+        method: "POST",
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then((r=>r.json()))
+      .then(data=>console.log(data))
     }
 
 
@@ -25,7 +34,7 @@ function Login() {
         <input className="col-start-2"
         type="text" placeholder="Password" name="password" />
         <button className="col-start-2 bg-pallette5" type="submit">Submit</button>
-        <p className="text-pallette6 text-sm text-right col-start-2">Forgot password?</p>
+        <p className="text-pallette6 text-sm text-right col-start-2 hover:underline cursor-pointer" onClick={()=>alert("L")} >Forgot password?</p>
       </form>
     </div>
   );

@@ -13,7 +13,6 @@ function Welcome() {
             Welcome to GigRoost
         </h2>
         <Login />
-        <ChooseAccount />
         <Signup />
     </div>
   );
