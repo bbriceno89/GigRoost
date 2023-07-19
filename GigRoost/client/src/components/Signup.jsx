@@ -22,6 +22,8 @@ function Signup() {
       },
       body: JSON.stringify(signupData)
     })
+    .then(r=>r.json())
+    .then(data=>console.log(data))
   }
 
 
