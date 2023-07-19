@@ -45,42 +45,39 @@ class Logout(Resource):
         else:
             return {"error": "No user logged in currently"}, 401
 
+class Reviews(Resource):
+    def get(self):
+        reviews = Review.query.all()
+        return make_response([review.to_dict() for review in reviews], 200)
+    def post(self):
+        try:
+            data = request.get_json()
+            review = Review(
+                writer_id=data['writer_id'],
+                rental_id=data['rental_id'],
+                rating=data['rating'],
+                comment=data['comment']
+            )
+            db.session.add(review)
+            db.session.commit()
+            return make_response(review.to_dict(), 201)
+        except:
+            make_response({"error":['Validation errors']}, 401)
+
+class Review_id(Resource):
+    def delete(self, id):
+        review = Review.query.filter(Review.review_id == id).first()
+        if not review:
+            abort(404)
+        db.session.delete(review)
+        db.session.commit()
+        return make_response({}, 204)
 
         
 api.add_resource(Signup, '/signup')
 api.add_resource(Login, '/login')
 api.add_resource(Logout, '/logout')
 
-# Route to get all reviews
-@app.route('/reviews', methods=['GET'])
-def get_all_reviews():
-    reviews = Review.query.all()
-    return make_response([review.to_dict() for review in reviews], 200)
-
-# Route to Post a review
-@app.route('/reviews', methods=['POST'])
-def post_review():
-    if not request.json:
-        abort(400)
-    review = Review(
-        writer_id=request.json['writer_id'],
-        rental_id=request.json['rental_id'],
-        rating=request.json['rating'],
-        comment=request.json['comment']
-    )
-    db.session.add(review)
-    db.session.commit()
-    return make_response(review.to_dict(), 201)
-
-#Route to delete a review
-@app.route('/reviews/<int:review_id>', methods=['DELETE'])
-def delete_review(review_id):
-    review = Review.query.filter_by(review_id=review_id).first()
-    if not review:
-        abort(404)
-    db.session.delete(review)
-    db.session.commit()
-    return make_response({'message': "review deleted successfully"}, 204)
 
 
 # Route to get all artist bookings
