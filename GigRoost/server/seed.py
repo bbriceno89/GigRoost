@@ -20,13 +20,14 @@ def create_fake_users(num_users):
         )
         user.password = 'test'
         db.session.add(user)
+        db.session.commit()
     
     # Commit the changes to the database after creating all users
-    db.session.commit()
 
-def create_fake_rentals(num_rentals):
+def create_fake_rentals(num_rentals, num_users):
     for _ in range(num_rentals):
         rental = Rental(
+            host_id=random.randint(1, num_users),
             location=fake.city(),
             beds=random.randint(1, 5),
             baths=random.uniform(1, 3),
@@ -110,11 +111,11 @@ def seed_database():
         num_artists = 15
         num_artist_bookings = 40
        
-        print("Generating Rentals...")
-        create_fake_rentals(num_rentals)
-        print("Complete")
         print("Generating Users...")
         create_fake_users(num_users)  # Moved this function call to generate users first
+        print("Complete")
+        print("Generating Rentals...")
+        create_fake_rentals(num_rentals, num_users)
         print("Complete")
         print("Generating Reviews...")
         create_fake_reviews(num_reviews, num_users, num_rentals)
