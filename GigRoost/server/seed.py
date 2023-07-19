@@ -18,6 +18,7 @@ def create_fake_users(num_users):
             account_type=account_type
             # Add other required user fields here
         )
+        user.password = 'test'
         db.session.add(user)
     
     # Commit the changes to the database after creating all users
@@ -31,7 +32,8 @@ def create_fake_rentals(num_rentals):
             baths=random.uniform(1, 3),
             sq_ft=random.randint(500, 2000),
             description=fake.text(),
-            availability_dates=fake.date_between(start_date='-1y', end_date='+1y')
+            availability_dates=str(fake.date_between(start_date='-1y', end_date='+1y')),
+            image_url = fake.text(max_nb_chars=12)
         )
         db.session.add(rental)
 
@@ -92,11 +94,21 @@ def seed_database():
         num_artists = 15
         num_artist_bookings = 40
        
+        print("Generating Rentals...")
         create_fake_rentals(num_rentals)
+        print("Complete")
+        print("Generating Users...")
         create_fake_users(num_users)  # Moved this function call to generate users first
+        print("Complete")
+        print("Generating Reviews...")
         create_fake_reviews(num_reviews, num_users, num_rentals)
+        print("Complete")
+        print("Generating Shows...")
         create_fake_shows(num_shows, num_artists)
+        print("Complete")
+        print("Generating Bookings...")
         create_fake_artist_bookings(num_artist_bookings, num_shows, num_rentals)
+        print("Complete")
 
         db.session.commit()
 
