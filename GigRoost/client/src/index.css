@@ -6,6 +6,10 @@
     li {
         @apply list-none font-semibold border-solid hover:bg-pallette3
     }
-
-    
+    input {
+        @apply rounded-md outline outline-1 outline-pallette6 text-pallette6 bg-pallette1
+    }
+    button {
+        @apply bg-pallette5 rounded-md hover:bg-pallette6 outline-pallette4 font-semibold outline outline-1
+    }
 }
