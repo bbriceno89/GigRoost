@@ -31,11 +31,13 @@ def create_fake_rentals(num_rentals):
             beds=random.randint(1, 5),
             baths=random.uniform(1, 3),
             sq_ft=random.randint(500, 2000),
-            description=fake.text(),
+            description=fake.paragraph(),
             availability_dates=str(fake.date_between(start_date='-1y', end_date='+1y')),
             image_url = fake.text(max_nb_chars=12)
         )
         db.session.add(rental)
+    # Commit the changes to the database after creating all users
+    db.session.commit()
 
 def create_fake_reviews(num_reviews, num_users, num_rentals):
     # Generate fake users
@@ -52,6 +54,8 @@ def create_fake_reviews(num_reviews, num_users, num_rentals):
             comment=fake.paragraph()
         )
         db.session.add(review)
+    # Commit the changes to the database after creating all users
+    db.session.commit()
 
 def create_fake_shows(num_shows, num_artists):
     artists = User.query.filter_by(account_type='artist').limit(num_artists).all()
@@ -68,6 +72,8 @@ def create_fake_shows(num_shows, num_artists):
             genre=random.choice(['rock', 'pop', 'jazz', 'hip-hop', 'country'])
         )
         db.session.add(show)
+    # Commit the changes to the database after creating all users
+    db.session.commit()
 
 def create_fake_artist_bookings(num_bookings, num_shows, num_rentals):
     shows = Show.query.limit(num_shows).all()
@@ -81,12 +87,22 @@ def create_fake_artist_bookings(num_bookings, num_shows, num_rentals):
             accepted=random.choice([0, 1])
         )
         db.session.add(booking)
+    # Commit the changes to the database after creating all users
+    db.session.commit()
 
 # Function to seed the database
 def seed_database():
     with app.app_context():
-        db.create_all()
+        # clear current database records to seed with new data
+        print("Wiping old Data...")
+        User.query.delete()
+        Rental.query.delete()
+        Review.query.delete()
+        ArtistBooking.query.delete()
+        Show.query.delete()
+        print("Complete")
 
+        # set number of each class to generate
         num_rentals = 20
         num_reviews = 50
         num_users = 30  # Add this line and adjust the value as needed
