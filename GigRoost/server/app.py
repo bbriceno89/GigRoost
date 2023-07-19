@@ -2,7 +2,10 @@ from flask import Flask, jsonify, request, abort, make_response, session
 from flask_restful import Resource
 from models import User, Show, Rental, ArtistBooking, Review
 from config import app, db, api
+from flask_migrate import Migrate  # Import Flask-Migrate
 
+# Initialize Flask-Migrate
+migrate = Migrate(app, db)
 
 
 class Signup(Resource):
