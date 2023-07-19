@@ -6,6 +6,8 @@
     li {
         @apply list-none font-semibold border-solid hover:bg-pallette3
     }
-
+    input {
+        @apply rounded-md outline-double outline-pallette4
+    }
     
 }

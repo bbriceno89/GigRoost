@@ -15,17 +15,19 @@ function Login() {
 
 
   return (
-    <>
-      <p>Login</p>
-      <form
+    <div className="grid content-center">
+      <form className="grid grid-rows-4 grid-cols-3 gap-4 h-36"
         onChange={handleChange}
         onSubmit={handleSubmit}
         value = {formData}>
-        <input type="text" placeholder="Username" name="username" />
-        <input type="text" placeholder="Password" name="password" />
-        <button type="submit">Submit</button>
+        <input className=" col-start-2 rounded-md"
+        type="text" placeholder="Username" name="username" />
+        <input className="col-start-2"
+        type="text" placeholder="Password" name="password" />
+        <button className="col-start-2 bg-pallette3" type="submit">Submit</button>
+        <p className="text-pallette6 text-sm text-right col-start-2">Forgot password?</p>
       </form>
-    </>
+    </div>
   );
 }
 
