@@ -5,7 +5,7 @@ const CardList = () => {
 
   useEffect(() => {
     // Fetch rental items from the server
-    fetch('http://127.0.0.1:5555/rentals?limit=8')
+    fetch('/api/rentals?limit=8')
       .then((response) => response.json())
       .then((data) => {
         const first8Items = data.slice(0,8);
