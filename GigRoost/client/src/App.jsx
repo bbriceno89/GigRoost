@@ -9,7 +9,7 @@ function App() {
     <div className="w-screen h-screen bg-pallette4">
       <Header />
       <Welcome />
-      <CardList /> {/* Add the CardList component here */}
+      <CardList />
     </div>
   );
 }

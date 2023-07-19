@@ -3,9 +3,13 @@ from flask_restful import Resource
 from models import User, Show, Rental, ArtistBooking, Review
 from config import app, db, api
 from flask_migrate import Migrate  # Import Flask-Migrate
+from flask_cors import CORS
 
 # Initialize Flask-Migrate
 migrate = Migrate(app, db)
+
+# Add the following two lines to enable CORS for your app
+CORS(app, supports_credentials=True)
 
 
 class Signup(Resource):
@@ -106,6 +110,7 @@ def get_all_shows():
 @app.route('/rentals', methods=['GET'])
 def get_all_rentals():
     rentals = Rental.query.all()
+    # print([rental.to_dict() for rental in rentals])
     return make_response([rental.to_dict() for rental in rentals], 200)
 
 # Route to create a new accommodation
@@ -181,6 +186,7 @@ def delete_rental(rental_id):
     db.session.commit()
 
     return make_response({}, 204)
+
 
 if __name__ == '__main__':
     # Set the environment to 'production' when running the main application
