@@ -23,10 +23,10 @@ function NavBar() {
   const noUserNav = (
     <>
         <li className="text-center px-4 py-4">
-        <a href="">Signup</a>
+        <a href="/signup">Signup</a>
         </li>
         <li className="text-center px-4 py-4">
-            <a href="">Login</a>
+            <a href="/login">Login</a>
         </li>
     </>
   );
