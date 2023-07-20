@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "./context/UserContext";
 
 function NavBar() {
-  const UserNav = "pass";
+  const { user, setUser } = useContext(UserContext)
+
+  function handleLogout() {
+    fetch('/api/logout', {
+      method: "DELETE",
+      headers: {
+        'Content-type': 'application/json'
+      }
+    })
+    setUser(null)
+  }
+
+  const userNav = (
+    <li onClick={handleLogout} className="text-center px-4 py-4">
+    <a href="">Logout</a>
+    </li>
+
+  );
   const noUserNav = (
     <>
         <li className="text-center px-4 py-4">
@@ -14,7 +32,7 @@ function NavBar() {
   );
 
   return (
-    <nav className=" text-pallette6 bg-pallette2 w-screen text-right inline-flex flex-row-reverse">{noUserNav}</nav>
+    <nav className=" text-pallette6 bg-pallette2 w-screen text-right inline-flex flex-row-reverse">{!user ? noUserNav : userNav}</nav>
   );
 }
 
