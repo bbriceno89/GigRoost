@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "./context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({})
     const { user, setUser } = useContext(UserContext)
     const [isError, setIsError] = useState(false)
@@ -27,7 +29,10 @@ function Login() {
         }
         throw new Error('Something went wrong')
       }))
-      .then(data=>setUser(data))
+      .then(data=> {
+        setUser(data)
+        navigate('/', {replace: true})
+      })
       .catch(error=>{
         console.log(error)
         setIsError(true)

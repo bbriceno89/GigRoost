@@ -13,6 +13,7 @@ sqlalchemy = "*"
 flask-bcrypt = "*"
 faker = "*"
 requests = "*"
+flask-cors = "*"
 
 [dev-packages]
 
