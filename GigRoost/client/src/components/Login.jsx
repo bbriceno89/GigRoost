@@ -3,10 +3,11 @@ import { UserContext } from "./context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-    const navigate = useNavigate()
-    const [formData, setFormData] = useState({})
-    const { user, setUser } = useContext(UserContext)
-    const [isError, setIsError] = useState(false)
+  const [formData, setFormData] = useState({})
+  const { user, setUser } = useContext(UserContext)
+  const [isError, setIsError] = useState(false)
+  
+  const navigate = useNavigate()
 
     function handleChange(e) {
       const name = e.target.name;
@@ -56,14 +57,14 @@ function Login() {
         </h2>
       <div className="grid content-center">
         {!!isError ? errorMessage : null}
-        <form className="grid grid-rows-4 grid-cols-3 gap-4 h-36"
+        <form className="grid grid-rows-4 grid-cols-3 gap-4 h-fill"
           onChange={handleChange}
           onSubmit={handleSubmit}
           value = {formData}>
           <input className=" col-start-2 rounded-md"
           type="text" placeholder="Username" name="username" />
           <input className="col-start-2"
-          type="text" placeholder="Password" name="password" />
+          type="password" placeholder="Password" name="password" />
           <button className="col-start-2 bg-pallette5" type="submit">Submit</button>
           <p className="text-pallette6 text-sm text-right col-start-2 hover:underline cursor-pointer" onClick={()=>alert("L")} >Forgot password?</p>
         </form>

@@ -1,10 +1,13 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "./context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [signupData, setSignupData] = useState({})
   const { user, setUser } = useContext(UserContext)
   const [isError, setIsError] = useState(false)
+
+  const navigate = useNavigate()
 
   function handleType(e) {
     setSignupData({...signupData, account_type: e.target.value})
@@ -31,7 +34,10 @@ function Signup() {
         return r.json()}
       throw new Error("Account name already taken")
     })
-    .then(data=>setUser(data))
+    .then(data=>{
+      setUser(data)
+      navigate('/', {replace: true})
+    })
     .catch((error)=>{
       console.log(error)
       setIsError(true)

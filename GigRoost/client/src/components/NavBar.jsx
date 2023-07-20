@@ -26,8 +26,8 @@ function NavBar() {
   )
   const userNav = (
     <>
-      <li onClick={handleLogout} className="text-center px-4 py-4">
-        <a href="/">Logout</a>
+      <li className="text-center px-4 py-4">
+        <a href="/" onClick={handleLogout} >Logout</a>
       </li>
       {(user?.account_type === "host") ? hostNav : null}
     </>

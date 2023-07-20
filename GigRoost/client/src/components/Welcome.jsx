@@ -1,4 +1,6 @@
 import React from "react";
+import Login from "./Login";
+import Signup from "./Signup";
 import chickenHoodGuitar from "../assets/chicken-hood-guitar.gif";
 
 function Welcome() {
