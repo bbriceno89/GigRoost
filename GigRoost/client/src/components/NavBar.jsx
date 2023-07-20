@@ -13,14 +13,7 @@ function NavBar() {
     })
     setUser(null)
   }
-
-  const userNav = (
-    <li onClick={handleLogout} className="text-center px-4 py-4">
-      <a href="/">Logout</a>
-    </li>
-
-  );
-
+  
   const hostNav = (
     <>
       <li className="text-center px-4 py-4">
@@ -31,6 +24,16 @@ function NavBar() {
       </li>
     </>
   )
+  const userNav = (
+    <>
+      <li onClick={handleLogout} className="text-center px-4 py-4">
+        <a href="/">Logout</a>
+      </li>
+      {(user?.account_type === "host") ? hostNav : null}
+    </>
+
+  );
+
 
   const noUserNav = (
     <>
@@ -44,7 +47,7 @@ function NavBar() {
   );
 
   return (
-    <nav className=" text-pallette6 bg-pallette2 w-screen text-right inline-flex flex-row-reverse">{!user ? noUserNav : userNav}</nav>
+    <nav className=" text-pallette6 bg-pallette2 w-screen text-right inline-flex flex-row-reverse px-2">{!user ? noUserNav : userNav}</nav>
   );
 }
 
