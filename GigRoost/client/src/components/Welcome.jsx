@@ -1,6 +1,5 @@
 import React from "react";
 import Login from "./Login";
-import ChooseAccount from "./ChooseAccount";
 import Signup from "./Signup";
 
 function Welcome() {
@@ -12,8 +11,7 @@ function Welcome() {
         <h2 className="text-pallette6 text-3xl font-bold text-center py-12">
             Welcome to GigRoost
         </h2>
-        <Login />
-        <Signup />
+        <p className="text-pallette6 font-semibold text-center mx-16 pb-12">GigRoost makes touring cheap and easy! Find a place to stay near your venue, or offer your place in exchange for tickets! With GigRoost, you are helping to bring together the music community!</p>
     </div>
   );
 }

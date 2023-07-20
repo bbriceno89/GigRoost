@@ -91,7 +91,6 @@ class Rental(db.Model, SerializerMixin):
     sq_ft = db.Column(db.Integer)
     description = db.Column(db.String)
     image_url = db.Column(db.String)
-    availability_dates = db.Column(db.String)
 
 # Establish a relationship between User and Rental
     host = db.relationship("User", backref="rentals")

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "./components/Header";
 import Welcome from "./components/Welcome";
 import CardList from "./components/CardList"; 
@@ -10,11 +10,23 @@ function App() {
 =======
 import { UserContext } from "./components/context/UserContext";
 import { Router, Routes, Route } from "react-router-dom";
->>>>>>> main
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import NewRental from "./components/NewRental";
 
 function App() {
   const { user, setUser } = useContext(UserContext)
-  console.log(user)
+
+  useEffect(()=> {
+    fetch('/api/check_session')
+    .then(r=> {
+      if (r.ok) {
+        return r.json()
+      }
+    })
+    .then(data=>setUser(data))
+  }, [])
+
   return (
     <div className="w-screen h-screen bg-pallette4">
       <Header />
@@ -26,6 +38,9 @@ function App() {
 =======
       <Routes>
         <Route path="/" element={!user ? <Welcome /> : <CardList />} />
+        <Route path='/login' element={<Login/>}/>
+        <Route path="/signup" element={<Signup/>}/>
+        <Route path="/rentals/new" element={<NewRental />} />
       </Routes>
 >>>>>>> main
     </div>

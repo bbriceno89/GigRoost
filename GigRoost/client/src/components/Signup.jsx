@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "./context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [signupData, setSignupData] = useState({})
+  const { user, setUser } = useContext(UserContext)
+  const [isError, setIsError] = useState(false)
+
+  const navigate = useNavigate()
 
   function handleType(e) {
     setSignupData({...signupData, account_type: e.target.value})
@@ -22,13 +28,39 @@ function Signup() {
       },
       body: JSON.stringify(signupData)
     })
-    .then(r=>r.json())
-    .then(data=>console.log(data))
+    .then(r=>{
+      if (r.ok) {
+        setIsError(false)
+        return r.json()}
+      throw new Error("Account name already taken")
+    })
+    .then(data=>{
+      setUser(data)
+      navigate('/', {replace: true})
+    })
+    .catch((error)=>{
+      console.log(error)
+      setIsError(true)
+    })
   }
+
+  const errorMessage = (
+    <div className="grid grid-cols-3 gap-4">
+      <p className="col-start-2 w-fit outline outline-red-500 p-1 mb-4 text-sm text-red-600 bg-red-300">Error: Username already taken</p>
+    </div>
+  )
 
 
   return (
     <>
+    <div 
+    className=" bg-pallette1 rounded-lg
+    w-fill h-fit 
+    mx-20 my-20 pb-12">
+      <h2 className="text-pallette6 text-3xl font-bold text-center py-12">
+          Welcome to GigRoost
+      </h2>
+      {!!isError ? errorMessage : null}
       <form onChange={handleChange} onSubmit={handleSubmit} className="grid grid-rows-4 grid-cols-3 gap-4 h-36">
         <input placeholder="Username" name="username" type="text" className=" col-start-2 rounded-md"/>
         <input placeholder="Password" name="password" type="text" className=" col-start-2 rounded-md"/>
@@ -40,6 +72,7 @@ function Signup() {
         </div>
         <button type="submit" className=" col-start-2 rounded-md bg-pallette5">Create Account</button>
       </form>
+    </div>
     </>
   );
 }

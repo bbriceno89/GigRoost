@@ -46,7 +46,6 @@ def create_fake_rentals(num_rentals, num_users):
             baths=random.uniform(1, 3),
             sq_ft=random.randint(500, 2000),
             description=fake.text(),
-            availability_dates=fake.date_between(start_date='-1y', end_date='+1y'),
             image_url=random_image_url 
         )
         db.session.add(rental)
