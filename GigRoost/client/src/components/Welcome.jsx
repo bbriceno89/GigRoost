@@ -1,6 +1,5 @@
 import React from "react";
 import Login from "./Login";
-import ChooseAccount from "./ChooseAccount";
 import Signup from "./Signup";
 
 function Welcome() {
