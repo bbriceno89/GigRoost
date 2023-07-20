@@ -5,11 +5,11 @@ const CardList = () => {
 
   useEffect(() => {
     // Fetch rental items from the server
-    fetch('http://127.0.0.1:5555/rentals?limit=4')
+    fetch('http://127.0.0.1:5555/rentals?limit=6')
       .then((response) => response.json())
       .then((data) => {
-        const first4Items = data.slice(0,4);
-        setRentalItems(first4Items);
+        const first6Items = data.slice(0,6);
+        setRentalItems(first6Items);
       })
       .catch((error) => {
         console.error('Error fetching rental data:', error);
