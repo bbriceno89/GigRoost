@@ -13,3 +13,9 @@
         @apply bg-pallette5 rounded-md hover:bg-pallette6 outline-pallette4 font-semibold outline outline-1
     }
 }
+
+@layer components {
+    .logo-image {
+      @apply absolute top-2 left-4 z-10 bg-pallette4; 
+    }
+}
