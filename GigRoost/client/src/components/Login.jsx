@@ -63,7 +63,7 @@ function Login() {
           <input className=" col-start-2 rounded-md"
           type="text" placeholder="Username" name="username" />
           <input className="col-start-2"
-          type="text" placeholder="Password" name="password" />
+          type="password" placeholder="Password" name="password" />
           <button className="col-start-2 bg-pallette5" type="submit">Submit</button>
           <p className="text-pallette6 text-sm text-right col-start-2 hover:underline cursor-pointer" onClick={()=>alert("L")} >Forgot password?</p>
         </form>
