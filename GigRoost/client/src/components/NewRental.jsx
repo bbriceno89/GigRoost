@@ -15,9 +15,9 @@ function NewRental() {
     }
 
     return(
-        <div className="bg-pallette1 w-fit h-fit py-6">
-            <p className="text-center text-lg font-semibold text-pallette6">New Listing</p>
-            <form className="grid grid-cols-5 grid-rows-12 gap-y-1 gap-x-3" >
+        <div className="bg-pallette1 w-fill h-fit py-6">
+            <p className="text-center text-lg font-semibold text-pallette6 mb-5">New Listing</p>
+            <form className="grid grid-cols-5 grid-rows-12 gap-y-1 gap-x-3 outline-double outline-8 outline-pallette4 bg-pallette2 py-3" >
                 <span className="col-start-2">Location:</span>
                 <input name="location" className="col-start-2 col-span-3" />
                 <span className="col-start-2">Beds:</span>
