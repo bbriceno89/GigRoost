@@ -3,10 +3,11 @@ import { UserContext } from "./context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-    const navigate = useNavigate()
-    const [formData, setFormData] = useState({})
-    const { user, setUser } = useContext(UserContext)
-    const [isError, setIsError] = useState(false)
+  const [formData, setFormData] = useState({})
+  const { user, setUser } = useContext(UserContext)
+  const [isError, setIsError] = useState(false)
+  
+  const navigate = useNavigate()
 
     function handleChange(e) {
       const name = e.target.name;
