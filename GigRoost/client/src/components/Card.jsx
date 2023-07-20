@@ -1,6 +1,6 @@
 import React from "react";
 
-function Card(item) {
+function Card({ item }) {
     return(
         <div key={item.rental_id} className="bg-white p-2 shadow-md">
             <img
