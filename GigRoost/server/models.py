@@ -27,7 +27,7 @@ class User(db.Model, SerializerMixin):
     def authenticate(self, password):
         return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
 
-    # Review Model
+# Review Model
 class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews'
 
@@ -48,7 +48,7 @@ class Review(db.Model, SerializerMixin):
 class ArtistBooking(db.Model, SerializerMixin):
     __tablename__ = 'artist_bookings'
 
-    serialize_rules= ('-show.artist_bookings', '-rental.artist_bookings')
+    serialize_rules= ('-show.artist_bookings', '-rental.artist_bookings', '-show.artist', "-rental.reviews")
 
     artist_booking_id = db.Column(db.Integer, primary_key=True)
     show_id = db.Column(db.Integer, db.ForeignKey('shows.show_id'))
@@ -81,7 +81,7 @@ class Show(db.Model, SerializerMixin):
 class Rental(db.Model, SerializerMixin):
     __tablename__ = 'rentals'
 
-    serialize_rules= ('-host.rentals','-reviews.rental', '-artist_bookings.rental')
+    serialize_rules= ('-host.rentals','-reviews.rental', '-artist_bookings.rental','-host.shows', '-artist_bookings.show')
 
     rental_id = db.Column(db.Integer, primary_key=True)
     host_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
