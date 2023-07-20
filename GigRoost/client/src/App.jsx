@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "./components/Header";
 import Welcome from "./components/Welcome";
 import CardList from "./components/CardList"; 
@@ -10,7 +10,15 @@ import Signup from "./components/Signup";
 function App() {
   const { user, setUser } = useContext(UserContext)
 
-
+  useEffect(()=> {
+    fetch('/api/check_session')
+    .then(r=> {
+      if (r.ok) {
+        return r.json()
+      }
+    })
+    .then(data=>setUser(data))
+  }, [])
 
   return (
     <div className="w-screen h-screen bg-pallette4">
