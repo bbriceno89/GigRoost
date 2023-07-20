@@ -56,7 +56,7 @@ function Login() {
         </h2>
       <div className="grid content-center">
         {!!isError ? errorMessage : null}
-        <form className="grid grid-rows-4 grid-cols-3 gap-4 h-36"
+        <form className="grid grid-rows-4 grid-cols-3 gap-4 h-fill"
           onChange={handleChange}
           onSubmit={handleSubmit}
           value = {formData}>
