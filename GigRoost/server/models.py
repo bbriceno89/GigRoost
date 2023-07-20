@@ -91,20 +91,3 @@ class Rental(db.Model, SerializerMixin):
     sq_ft = db.Column(db.Integer)
     description = db.Column(db.String)
     image_url = db.Column(db.String)
-
-# Establish a relationship between User and Rental
-    host = db.relationship("User", backref="rentals")
-
-    def to_dict(self):
-        rental_data = {
-            'rental_id': self.rental_id,
-            'location': self.location,
-            'beds': self.beds,
-            'baths': self.baths,
-            'sq_ft': self.sq_ft,
-            'description': self.description,
-            'image_url': self.image_url,
-            'availability_dates': self.availability_dates,
-        }
-        return rental_data
-
