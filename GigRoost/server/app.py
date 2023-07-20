@@ -32,7 +32,7 @@ class CheckSession(Resource):
     def get(self):
         user_id = session['user_id']
         if user_id:
-            user = User.query.filter(User.id == user_id).first()
+            user = User.query.filter(User.user_id == user_id).first()
             return make_response(user.to_dict(), 200)
         else:
             return make_response({"error": "No user currently logged in"}, 401)
