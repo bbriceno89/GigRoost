@@ -23,10 +23,13 @@ function App() {
   }, [])
 
   return (
-   /* <div className="w-screen h-screen bg-pallette4">
-     <Header />
+    <div className="w-screen h-screen bg-pallette4">
+      <Header />
       <Routes>
         <Route path="/" element={!user ? <Welcome /> : <CardList />} />
+        <Route path='/login' element={<Login/>}/>
+        <Route path="/signup" element={<Signup/>}/>
+        <Route path="/rentals/new" element={<NewRental />} />
       </Routes>
     </div>
   );
