@@ -20,7 +20,25 @@ GigRoost is a web application designed to connect musicians and artists with hos
 
 ## Features
 
+* User authentication and registration for artists and hosts
+* Artist profiles with tour details and show information
+* Host profiles with available rental options
+* Search functionality to find suitable matches between artists and hosts
+* Messaging system for communication between artists and hosts
+
 ## Dependencies
+
+Before running GigRoost, you need to ensure the following dependencies are installed:
+
+### Front-end
+* Node.js(v14.0.0 or higher)
+* npm 
+
+### Back-end
+* Python(v3.8 or higher)
+* Flask(v2.0 or higher)
+* SQLAlchemy(v.14 or higher)
+* SQLite (v3.30 or higher) 
 
 ## Installation
 
