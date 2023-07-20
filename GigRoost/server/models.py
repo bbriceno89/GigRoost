@@ -108,4 +108,3 @@ class Rental(db.Model, SerializerMixin):
             'availability_dates': self.availability_dates,
         }
         return rental_data
-

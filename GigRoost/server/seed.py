@@ -5,14 +5,17 @@ from faker import Faker
 import random
 import requests
 
-predefined_image_urls = list(set([
-    'https://images.unsplash.com/photo-1472207241423-9e30d66d4b0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aG91c2UsYXBhcnRtZW50fHx8fHx8MTY4OTc5NDE5Mw&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080',
-    'https://images.unsplash.com/photo-1522050212171-61b01dd24579?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aG91c2UsYXBhcnRtZW50fHx8fHx8MTY4OTc5NDE4OA&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080',
-    'https://images.unsplash.com/photo-1528827816431-d3f46a4427f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aG91c2UsYXBhcnRtZW50fHx8fHx8MTY4OTc5NDE5Mg&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080',
-    'https://images.unsplash.com/photo-1519475889208-0968e5438f7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aG91c2UsYXBhcnRtZW50fHx8fHx8MTY4OTc5NDE5MA&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080',
-    'https://images.unsplash.com/photo-1494512163437-5d01c88c0e5a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aG91c2UsYXBhcnRtZW50fHx8fHx8MTY4OTc5NDE5Ng&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080',
+predefined_image_urls = [
+    'https://images.unsplash.com/photo-1494512163437-5d01c88c0e5a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aG91c2UsYXBhcnRtZW50fHx8fHx8MTY4OTc5NDE4NA&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=108',
     'https://images.unsplash.com/photo-1541320823636-40247af897bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aG91c2UsYXBhcnRtZW50fHx8fHx8MTY4OTc5NDE4NQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080',
-]))
+    'https://images.unsplash.com/photo-1522050212171-61b01dd24579?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aG91c2UsYXBhcnRtZW50fHx8fHx8MTY4OTc5NDE4OA&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080',
+    'https://images.unsplash.com/photo-1519475889208-0968e5438f7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aG91c2UsYXBhcnRtZW50fHx8fHx8MTY4OTc5NDE5MA&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080',
+    'https://images.unsplash.com/photo-1528827816431-d3f46a4427f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aG91c2UsYXBhcnRtZW50fHx8fHx8MTY4OTc5NDE5Mg&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080',
+    'https://images.unsplash.com/photo-1472207241423-9e30d66d4b0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aG91c2UsYXBhcnRtZW50fHx8fHx8MTY4OTc5NDE5Mw&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080',
+    'https://images.unsplash.com/photo-1472207241423-9e30d66d4b0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aG91c2UsYXBhcnRtZW50fHx8fHx8MTY4OTc5NDE5Mw&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080',
+    'https://images.unsplash.com/photo-1494512163437-5d01c88c0e5a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aG91c2UsYXBhcnRtZW50fHx8fHx8MTY4OTc5NDE5Ng&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080',
+]
+
 
 fake = Faker()
 
@@ -25,7 +28,7 @@ def create_fake_users(num_users):
         user = User(
             username=username,
             account_type=account_type
-            
+            # Add other required user fields here
         )
         user.password = 'test'
         db.session.add(user)
@@ -86,17 +89,16 @@ def create_fake_shows(num_shows, num_artists):
     # Commit the changes to the database after creating all users
     db.session.commit()
 
-def create_fake_rentals(num_rentals):
-    for _ in range(num_rentals):
-        random_image_url = fetch_random_image()  # Fetch a random image URL from Unsplash
-        rental = Rental(
-            location=fake.city(),
-            beds=random.randint(1, 5),
-            baths=random.uniform(1, 3),
-            sq_ft=random.randint(500, 2000),
-            description=fake.text(),
-            availability_dates=fake.date_between(start_date='-1y', end_date='+1y'),
-            image_url=random_image_url 
+def create_fake_artist_bookings(num_bookings, num_shows, num_rentals):
+    shows = Show.query.limit(num_shows).all()
+    rentals = Rental.query.limit(num_rentals).all()
+
+    for _ in range(num_bookings):
+        booking = ArtistBooking(
+            show=random.choice(shows),
+            rental=random.choice(rentals),
+            booking_date=fake.date_between(start_date='-1y', end_date='+1y'),
+            accepted=random.choice([0, 1])
         )
         db.session.add(booking)
     # Commit the changes to the database after creating all users
@@ -105,12 +107,11 @@ def create_fake_rentals(num_rentals):
 def fetch_random_image():
     try:
         response = requests.get('https://source.unsplash.com/featured/?house,apartment')
-        response.raise_for_status()
+        response.raise_for_status()  # Raise an error for unsuccessful responses
         return response.url
     except requests.exceptions.RequestException as e:
         print('Error fetching random image:', e)
         return None
-
 
 
 # Function to seed the database
@@ -128,7 +129,7 @@ def seed_database():
         # set number of each class to generate
         num_rentals = 20
         num_reviews = 50
-        num_users = 30  
+        num_users = 30  # Add this line and adjust the value as needed
         num_shows = 30
         num_artists = 15
         num_artist_bookings = 40
