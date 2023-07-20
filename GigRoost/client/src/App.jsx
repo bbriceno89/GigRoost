@@ -6,6 +6,7 @@ import { UserContext } from "./components/context/UserContext";
 import { Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import NewRental from "./components/NewRental";
 
 function App() {
   const { user, setUser } = useContext(UserContext)
@@ -27,6 +28,7 @@ function App() {
         <Route path="/" element={!user ? <Welcome /> : <CardList />} />
         <Route path='/login' element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
+        <Route path="/rentals/new" element={<NewRental />} />
       </Routes>
     </div>
   );

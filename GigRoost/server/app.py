@@ -112,7 +112,6 @@ class Rentals(Resource):
         baths = data['baths']
         sq_ft = data['sq-ft']
         description = data['description']
-        availability_dates = data['availability_dates']
         image_url = data['image_url']
 
     # Perform some basic validation on the input data, you can add more checks as per your requirements.
