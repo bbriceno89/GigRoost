@@ -1,8 +1,12 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
 import CardList from "./CardList";
 
+
 function Details({ selectedItem }) {
+
+  const { id } = useParams();
 
 
   return (
