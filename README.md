@@ -41,13 +41,53 @@ Before running GigRoost, you need to ensure the following dependencies are insta
 * SQLite (v3.30 or higher) 
 
 ## Installation
+1. Clone the repository from GitHub:
+   ```bash
+   git clone https://github.com/your-team/gigroost.git
+   cd gigroost
 
 ## Front-end Setup
 
++ Navigate to the front-end directory: `cd client`
+
++ Install the required Node.js packages: `npm install`
+
 ## Back-end Setup
+
++ Navigate to the back-end directory: `cd server`
+
++ Create a virtual environment (optional but recommended): `python -m venv venv`
+
++ Activate the virtual environment:
+  - On Windows: `venv\Scripts\activate`
+  - On macOS and Linux: `source venv/bin/activate`
+
++ Install the required Python packages: `pip install -r requirements.txt`
+
++ Initialize the database:
+  ```bash
+  flask db init
+  flask db migrate -m "Initial migration"
+  flask db upgrade
 
 ## Running the Application
 
+1. Start the front-end development server:
+   ```bash
+   cd client
+   npm run dev
+  
+2. Start the back-end server:
+   ```bash
+   cd server
+   flask run
+
+The application should now be accessible at http://localhost:3000/ in your web browser 
+
 ## Contributing
 
+We welcome contributions from the community to enhance GigRoost. If you find any bugs or have suggestions for new features, please feel free to open an issue or submit a pull request
+
 ## License
+
+This project is licensed under the MIT License. You are free to use, modify, and distribute this software according to the terms of the license.
