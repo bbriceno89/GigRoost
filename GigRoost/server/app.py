@@ -14,7 +14,7 @@ CORS(app, supports_credentials=True)
 
 class Signup(Resource):
     def post(self):
-        # try:
+        try:
             data = request.get_json()
             new_user = User(
                 username = data['username'],
@@ -25,8 +25,8 @@ class Signup(Resource):
             db.session.commit()
             session['user_id'] = new_user.user_id
             return make_response(new_user.to_dict(), 201)
-        # except:
-        #     return make_response({'errors':['validation errors']}, 400)
+        except:
+            return make_response({'errors':['validation errors']}, 400)
 
 class Login(Resource):
     def post(self):
