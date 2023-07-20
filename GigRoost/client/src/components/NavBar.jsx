@@ -16,10 +16,22 @@ function NavBar() {
 
   const userNav = (
     <li onClick={handleLogout} className="text-center px-4 py-4">
-    <a href="">Logout</a>
+      <a href="/">Logout</a>
     </li>
 
   );
+
+  const hostNav = (
+    <>
+      <li className="text-center px-4 py-4">
+        <a href="">My Listings</a>
+      </li>
+      <li className="text-center px-4 py-4">
+        <a href="">New Listing</a>
+      </li>
+    </>
+  )
+
   const noUserNav = (
     <>
         <li className="text-center px-4 py-4">

@@ -17,6 +17,7 @@ function App() {
         return r.json()
       }
     })
+    .then(data=>setUser(data))
   }, [])
 
   return (
