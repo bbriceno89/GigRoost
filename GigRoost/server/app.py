@@ -28,6 +28,15 @@ class Signup(Resource):
         except:
             return make_response({'errors':['validation errors']}, 400)
 
+class CheckSession(Resource):
+    def get(self):
+        user_id = session['user_id']
+        if user_id:
+            user = User.query.filter(User.id == user_id).first()
+            return make_response(user.to_dict(), 200)
+        else:
+            return make_response({"error": "No user currently logged in"}, 401)
+        
 class Login(Resource):
     def post(self):
         data = request.get_json()
@@ -161,6 +170,7 @@ class Rental_id(Resource):
 
 
 api.add_resource(Signup, '/signup')
+api.add_resource(CheckSession, '/check_session')
 api.add_resource(Login, '/login')
 api.add_resource(Logout, '/logout')
 api.add_resource(Reviews, '/reviews')
