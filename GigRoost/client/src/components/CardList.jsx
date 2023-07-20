@@ -8,8 +8,8 @@ const CardList = () => {
     fetch('/api/rentals?limit=8')
       .then((response) => response.json())
       .then((data) => {
-        const first6Items = data.slice(0,6);
-        setRentalItems(first6Items);
+        const first8Items = data.slice(0,8);
+        setRentalItems(first8Items);
       })
       .catch((error) => {
         console.error('Error fetching rental data:', error);
@@ -23,13 +23,13 @@ const CardList = () => {
       </h2>
       <div className="grid grid-cols-2 gap-4">
         {rentalItems.map((item) => (
-          <div key={item.rental_id} className="bg-white p-2 shadow-md card">
+          <div key={item.rental_id} className="bg-white p-2 shadow-md">
             <img
               src={item.image_url || '/fallback-image.jpg'}
               alt={`Rental Item ${item.rental_id}`}
               className="w-full h-36 object-cover mb-2"
             />
-            <p className="text-base text-center" style={{ color: 'white', fontWeight: 'bold' }}>
+            <p className="text-base text-center" style={{ color: 'black', fontWeight: 'bold' }}>
               {item.description}
             </p>
           </div>
