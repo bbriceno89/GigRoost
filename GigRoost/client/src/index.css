@@ -7,13 +7,15 @@
         @apply list-none font-semibold border-solid hover:bg-pallette3
     }
     input {
-        @apply rounded-md outline outline-1 outline-pallette6 text-pallette6 bg-pallette1
+        @apply rounded-md outline outline-1 outline-pallette1 text-pallette4 bg-pallette5
     }
     button {
-        @apply bg-pallette5 rounded-md hover:bg-pallette6 outline-pallette4 font-semibold outline outline-1
+        @apply bg-pallette2 rounded-md hover:bg-pallette3 outline-pallette4 font-semibold outline outline-1
+    }
+    span {
+        @apply text-pallette6
     }
 }
-
 @layer components {
     .logo-image {
       @apply absolute top-2 left-4 z-10 bg-pallette4; 
