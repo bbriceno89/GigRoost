@@ -20,10 +20,19 @@ function NavBar() {
         <a href="">My Listings</a>
       </li>
       <li className="text-center px-4 py-4">
-        <a href="">New Listing</a>
+        <a href="/rentals/new">New Listing</a>
       </li>
     </>
   )
+
+    const artistNav = (
+      <>
+      <li className="text-center px-4 py-4">
+        <a href="">Add a Show</a>
+      </li>
+      </>
+    )
+
   const userNav = (
     <>
       <li className="text-center px-4 py-4">
