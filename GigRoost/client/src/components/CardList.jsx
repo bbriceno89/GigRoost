@@ -23,7 +23,7 @@ const CardList = () => {
       <h2 className="text-pallette6 text-3xl font-bold text-center pt-5">
         Find a Place to Crash
       </h2>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid gap-4 grid-cols-4 py-7 px-3">
         {rentalItems.map((item) => <Card item={item} key={item.rental_id}/> )}
       </div>
     </div>
