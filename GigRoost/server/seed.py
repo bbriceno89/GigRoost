@@ -5,6 +5,9 @@ from faker import Faker
 import random
 import requests
 
+# export FLASK_APP=app.py
+# export FLASK_RUN_PORT=5555
+
 predefined_image_urls = [
     'https://images.unsplash.com/photo-1494512163437-5d01c88c0e5a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aG91c2UsYXBhcnRtZW50fHx8fHx8MTY4OTc5NDE4NA&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=108',
     'https://images.unsplash.com/photo-1541320823636-40247af897bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8aG91c2UsYXBhcnRtZW50fHx8fHx8MTY4OTc5NDE4NQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080',
