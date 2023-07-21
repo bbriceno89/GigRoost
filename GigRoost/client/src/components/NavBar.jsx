@@ -17,7 +17,7 @@ function NavBar() {
   const hostNav = (
     <>
       <li className="text-center px-4 py-4">
-        <a href="">My Listings</a>
+        <a href="/my_rentals">My Listings</a>
       </li>
       <li className="text-center px-4 py-4">
         <a href="/rentals/new">New Listing</a>
