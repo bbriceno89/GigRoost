@@ -3,20 +3,23 @@
 GigRoost is a full-stack application built with React, Flask, SQL, and Python that facilitates musicians and artists in finding places to stay while traveling, offered by willing hosts in exchange for tickets to their shows. This README.md provides instructions on how to run both the front-end and back-end components of the application, along with a list of dependencies that need to be installed.
 
 ## Table of Contents 
-1. [Introduction](#introduction)
-2. [Features](#features)
-3. [Dependencies](#dependencies)
-4. [Installation](#installation)
-5. [Front-end Setup](#front-end-setup)
-6. [Back-end Setup](#back-end-setup)
-7. [Running the Application](#running-the-application)
-8. [Contributing](#contributing)
-9. [License](#license)
+1.  [Introduction](#introduction)
+2.  [Features](#features)
+3.  [Requirements](#requirements)
+4.  [Installation](#installation)
+5.  [Front-end Setup](#front-end-setup)
+6.  [Back-end Setup](#back-end-setup)
+7.  [Running the Application](#running-the-application)
+8.  [API Endpoints](#api-endpoints)
+9.  [Contributing](#contributing)
+10. [License](#license)
 
 
 ## Introduction
 
 GigRoost is a web application designed to connect musicians and artists with hosts who are willing to provide them with places to stay while they are on tour. Artists can browse and find suitable accommodation options offered by hosts in exchange for tickets to their shows, fostering a sense of community and mutual support within the music industry.
+
+The front-end is built using React, while the back-end uses Flask, Flask-Restful, SQLAlchemy, and other supporting libraries.
 
 ## Features
 
@@ -26,21 +29,17 @@ GigRoost is a web application designed to connect musicians and artists with hos
 * Search functionality to find suitable matches between artists and hosts
 * Messaging system for communication between artists and hosts
 
-## Dependencies
+## Requirements
 
-Before running GigRoost, you need to ensure the following dependencies are installed:
+To run the web application, you need the following software installed on your system:
 
-### Front-end
-* Node.js(v14.0.0 or higher)
-* npm 
-
-### Back-end
-* Python(v3.8 or higher)
-* Flask(v2.0 or higher)
-* SQLAlchemy(v.14 or higher)
-* SQLite (v3.30 or higher) 
+- Node.js (>= 12)
+- Python (>= 3.8)
+- npm (Node.js package manager)
+- pip (Python package manager)
 
 ## Installation
+
 1. Clone the repository from GitHub:
    ```bash
    git clone https://github.com/your-team/gigroost.git
@@ -76,13 +75,34 @@ Before running GigRoost, you need to ensure the following dependencies are insta
    ```bash
    cd client
    npm run dev
+
+The application should now be accessible at http://localhost:5173/ in your web browser 
   
 2. Start the back-end server:
    ```bash
    cd server
    flask run
 
-The application should now be accessible at http://localhost:3000/ in your web browser 
+The backend will run on http://localhost:5555 by default.
+
+## API Endpoints
+
+The backend provides the following API endpoints:
+
+- POST /signup: Create a new user account.
+- GET /check_session: Check the user's session status.
+- POST /login: Log in a user.
+- DELETE /logout: Log out a user.
+- GET /reviews: Retrieve all reviews.
+- POST /reviews: Create a new review.
+- DELETE /reviews/<int:id>: Delete a review by ID.
+- GET /bookings: Retrieve all artist bookings.
+- GET /shows: Retrieve all shows.
+- GET /rentals: Retrieve all rental listings.
+- POST /rentals: Create a new rental listing.
+- GET /rentals/<int:id>: Retrieve a rental listing by ID.
+- PATCH /rentals/<int:id>: Update a rental listing by ID.
+- DELETE /rentals/<int:id>: Delete a rental listing by ID.
 
 ## Contributing
 
