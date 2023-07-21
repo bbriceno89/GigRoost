@@ -1,6 +1,10 @@
 import React from "react";
 
 function Card({ item }) {
+  const handleClick = () => {
+    window.location.href = `/rentals/${item.rental_id}`;
+  };
+
 
     const desc_preview = item.description.slice(0, 64) + "..."
 
