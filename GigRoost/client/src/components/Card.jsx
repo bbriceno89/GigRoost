@@ -13,7 +13,7 @@ function Card({ item }) {
           />
           <div className="p-4 absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-pallette4/95 to-transparent translate-y-1/4 group-hover:translate-y-0 transition-all">
             <h2 className="text-pallette6 text-xl font-semibold" >{item.location}</h2>
-            <p className="text-pallette5 text-sm w-40">{desc_preview}</p>
+            <h3 className="text-pallette5 text-sm w-40">{desc_preview}</h3>
           </div>
         </div>
     )
