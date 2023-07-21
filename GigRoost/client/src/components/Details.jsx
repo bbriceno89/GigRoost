@@ -1,44 +1,70 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CardList from "./CardList";
+import Card from "./Card";
 
 
-function Details({ selectedItem }) {
+function Details() {
 
-  const { id } = useParams();
+  const [rentalDescription, setRentalDescription] = useState("");
+  const [rentalImage, setRentalImage] = useState("");
+  const [rentalBeds, setRentalBeds] = useState([]);
+  const [rentalBaths, setRentalBaths] = useState([]);
+  const [availabilityDates, setAvailabilityDates] = useState("");
 
+
+  const { id } = useParams();  
+  console.log(id);
+
+  useEffect(() => {
+    // Fetch rental items from the server
+    fetch(`/api/rentals/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+     console.log(data);
+        setRentalDescription(data.description);
+        setRentalImage(data.image_url);
+        setRentalBeds(data.beds);
+        setRentalBaths(data.baths);
+       
+      })
+      .catch((error) => {
+        console.error('Error fetching rental data:', error);
+      });
+  }, []);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    console.log(name, value);
+    setAvailabilityDates(value);
+  }
+;
+
+  
+  
 
   return (
     <>
       <div className="flex flex-col w-screen h-screen">
         <div className="bg-pallette1 flex justify-center items-center py-4">
-          <button
-            type="button"
-            className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
-          >
-            Dates
-          </button>
+         <label htmlFor= "start">Check Availability: </label>
           <input
             type="date"
             id="start"
             name="trip-start"
-            value= ""
+            value= {availabilityDates}
             className="border border-gray-400 rounded-lg px-3 py-2 mr-2 mb-2"
+            onChange = {handleChange}
           ></input>
-          <button
-            type="button"
-            className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
-          >
-            Check Availability
-          </button>
+        
         </div>
 
         <div className="flex-1 flex">
           <div className="w-1/2 h-full">
             <div className="h-full bg-gray-300">
               <img
-               /* src={selectedItem.image_url || "/fallback-image.jpg"} */
+               src={rentalImage} 
                 className="h-full w-full object-cover"
               />
             </div>
@@ -47,7 +73,11 @@ function Details({ selectedItem }) {
           <div className="w-1/2 h-full">
             <div className="h-full bg-pallette1 border border-gray-500 p-4 overflow-auto">
               <h2 className="text-2xl font-bold mb-4">Apartment</h2>
-              <p className="text-lg">{/*selectedItem.description*/}</p>
+              <div>
+              <p className="text-lg">{rentalDescription}</p>
+              <p className="test-lg">Beds:  {rentalBeds}</p>
+              <p className="test-lg">Baths:  {Math.round(rentalBaths)}</p>
+              </div>
             </div>
           </div>
         </div>
