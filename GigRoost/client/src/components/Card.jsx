@@ -8,7 +8,6 @@ function Card({ item }) {
   };
 
 
-<<<<<<< HEAD
   const desc_preview = item.description.slice(0, 64) + "...";
 
   return (
@@ -27,7 +26,6 @@ function Card({ item }) {
       </p>
     </div>
   );
-=======
     return(
         <div className="overflow-hidden rounded-xl relative h-72 shadow-lg group">
           <img
@@ -41,7 +39,6 @@ function Card({ item }) {
           </div>
         </div>
     )
->>>>>>> main
 }
 
 export default Card;
