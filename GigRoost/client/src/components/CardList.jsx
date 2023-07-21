@@ -4,6 +4,7 @@ import Card from './Card';
 const CardList = () => {
   const [rentalItems, setRentalItems] = useState([]);
 
+
   useEffect(() => {
     // Fetch rental items from the server
     fetch('/api/rentals?limit=8')
