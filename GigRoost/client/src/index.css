@@ -19,3 +19,14 @@
         @apply text-left w-fit px-1 text-pallette6 text-xs
     }
 }
+
+/* Define separate classes for scrollbar hiding */
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
