@@ -30,6 +30,9 @@ function NavBar() {
       <li className="text-center px-4 py-4">
         <a href="">Add a Show</a>
       </li>
+      <li className="text-center px-4 py-4">
+        <a href="">Leave a Review</a>
+      </li>
       </>
     )
 
@@ -38,7 +41,7 @@ function NavBar() {
       <li className="text-center px-4 py-4">
         <a href="/" onClick={handleLogout} >Logout</a>
       </li>
-      {(user?.account_type === "host") ? hostNav : null}
+      {(user?.account_type === "host") ? hostNav : artistNav}
     </>
 
   );
