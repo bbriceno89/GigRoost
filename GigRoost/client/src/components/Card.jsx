@@ -9,8 +9,6 @@ function Card({ item }) {
 
   const baths = Math.round(item.baths * 2)/2
 
-  const desc_preview = item.description.slice(0, 64) + "..."
-
   return(
       <div onClick={handleClick} className="overflow-hidden rounded-xl relative h-72 shadow-lg group cursor-pointer">
         <img
