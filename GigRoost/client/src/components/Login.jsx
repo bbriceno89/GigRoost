@@ -65,20 +65,20 @@ function Login() {
         <form className="grid grid-rows-4 grid-cols-3 gap-y-4 h-fill"
         onSubmit={formik.handleSubmit}>
           <input 
-          className={formik.errors.username && formik.touched.username ? "col-start-2 rounded-md bg-red-300" : "col-start-2 rounded-md"}
+          className={formik.errors.username && formik.touched.username ? "col-start-2 rounded-md bg-red-300 placeholder-black" : "col-start-2 rounded-md placeholder-black"}
           type="text" placeholder="Username" name="username"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.username}/>
           {formik.errors.username && formik.touched.username ? <p>{formik.errors.username}</p> : null}
           <input 
-          className={formik.errors.password && formik.touched.password ? "col-start-2 rounded-md bg-red-300" : "col-start-2 rounded-md"}
+          className={formik.errors.password && formik.touched.password ? "col-start-2 rounded-md bg-red-300 placeholder-black" : "col-start-2 rounded-md placeholder-black"}
           type="password" placeholder="Password" name="password"
           onChange={formik.handleChange}
           onBlur={formik.onBlur}
           value={formik.values.password}/>
           {formik.errors.password && formik.touched.password ? <p>{formik.errors.password}</p> : null}
-          <button className="col-start-2 bg-pallette5" type="submit">Submit</button>
+          <button className="col-start-2 bg-pallette6" type="submit">Submit</button>
           <h4 className="text-pallette6 text-sm text-right col-start-2 hover:underline cursor-pointer" onClick={()=>alert("L")} >Forgot password?</h4>
         </form>
       </div>
