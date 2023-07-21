@@ -15,6 +15,9 @@
     span {
         @apply text-pallette6
     }
+    p {
+        @apply text-left w-fit px-1 text-pallette6 text-xs
+    }
 }
 @layer components {
     .logo-image {

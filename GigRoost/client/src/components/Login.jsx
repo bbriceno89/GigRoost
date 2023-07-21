@@ -1,27 +1,30 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "./context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 function Login() {
-  const [formData, setFormData] = useState({})
   const { user, setUser } = useContext(UserContext)
   const [isError, setIsError] = useState(false)
   
   const navigate = useNavigate()
-
-    function handleChange(e) {
-      const name = e.target.name;
-      const value = e.target.value;
-      setFormData({...formData, [name]: value});
-    }
-    function handleSubmit(e) {
-      e.preventDefault();
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      password: ""
+    },
+    validationSchema: Yup.object({
+      username: Yup.string().required("Required"),
+      password: Yup.string().required("Required")
+    }),
+    onSubmit: (values)=> {
       fetch('/api/login', {
         method: "POST",
         headers: {
           'Content-type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(values)
       })
       .then((r=>{
         if (r.ok) {
@@ -37,14 +40,16 @@ function Login() {
       .catch(error=>{
         console.log(error)
         setIsError(true)
-      })
+      })  
     }
+  })
 
-    const errorMessage = (
-      <div className="grid grid-cols-3 gap-4">
-        <p className="col-start-2 w-fit outline outline-red-500 p-1 mb-4 text-sm text-red-600 bg-red-300">Error: Username or password does not exist</p>
-      </div>
-    )
+
+  const errorMessage = (
+    <div className="grid grid-cols-3 gap-4">
+      <p className="col-start-2 w-fit outline outline-red-500 p-1 mb-4 text-sm text-red-600 bg-red-300">Error: Username or Password Incorrect.</p>
+    </div>
+  )
 
 
   return (
@@ -57,16 +62,24 @@ function Login() {
         </h2>
       <div className="grid content-center">
         {!!isError ? errorMessage : null}
-        <form className="grid grid-rows-4 grid-cols-3 gap-4 h-fill"
-          onChange={handleChange}
-          onSubmit={handleSubmit}
-          value = {formData}>
-          <input className=" col-start-2 rounded-md"
-          type="text" placeholder="Username" name="username" />
-          <input className="col-start-2"
-          type="password" placeholder="Password" name="password" />
+        <form className="grid grid-rows-4 grid-cols-3 gap-y-4 h-fill"
+        onSubmit={formik.handleSubmit}>
+          <input 
+          className={formik.errors.username && formik.touched.username ? "col-start-2 rounded-md bg-red-300" : "col-start-2 rounded-md"}
+          type="text" placeholder="Username" name="username"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.username}/>
+          {formik.errors.username && formik.touched.username ? <p>{formik.errors.username}</p> : null}
+          <input 
+          className={formik.errors.password && formik.touched.password ? "col-start-2 rounded-md bg-red-300" : "col-start-2 rounded-md"}
+          type="password" placeholder="Password" name="password"
+          onChange={formik.handleChange}
+          onBlur={formik.onBlur}
+          value={formik.values.password}/>
+          {formik.errors.password && formik.touched.password ? <p>{formik.errors.password}</p> : null}
           <button className="col-start-2 bg-pallette5" type="submit">Submit</button>
-          <p className="text-pallette6 text-sm text-right col-start-2 hover:underline cursor-pointer" onClick={()=>alert("L")} >Forgot password?</p>
+          <h4 className="text-pallette6 text-sm text-right col-start-2 hover:underline cursor-pointer" onClick={()=>alert("L")} >Forgot password?</h4>
         </form>
       </div>
     </div>
