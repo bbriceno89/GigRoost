@@ -18,7 +18,7 @@ const CardList = () => {
   }, []);
   
   return (
-    <div className="bg-pallette1 w-fill h-4/5 mx-7 my-5 overflow-y-scroll no-scrollbar">
+    <div className="bg-pallette1 w-fill h-4/5 mx-7 my-5 overflow-y-scroll no-scrollbar rounded-2xl outline outline-pallette5">
       <h2 className="text-pallette6 text-3xl font-bold text-center pt-5 bg-pallette1">
         Find a Place to Crash
       </h2>
