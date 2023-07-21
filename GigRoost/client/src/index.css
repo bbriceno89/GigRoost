@@ -17,17 +17,5 @@
     }
     p {
         @apply text-left w-fit px-1 text-pallette6 text-xs
-        @apply bg-pallette2 rounded-md hover:bg-pallette3 outline-pallette4 font-semibold outline outline-1
-    }
-    span {
-        @apply text-pallette6
-    }
-    p {
-        @apply text-left w-fit px-1 text-pallette6 text-xs
-    }
-}
-@layer components {
-    .logo-image {
-      @apply absolute top-2 left-4 z-10 bg-pallette4; 
     }
 }
