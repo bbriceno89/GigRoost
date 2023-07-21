@@ -7,7 +7,7 @@
         @apply list-none font-semibold border-solid hover:bg-pallette3
     }
     input {
-        @apply rounded-md outline outline-1 outline-pallette1 text-pallette4 bg-pallette5
+        @apply rounded-md outline outline-1 outline-pallette1 text-pallette4 bg-pallette6
     }
     button {
         @apply bg-pallette2 rounded-md hover:bg-pallette3 outline-pallette4 font-semibold outline outline-1

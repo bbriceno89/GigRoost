@@ -66,11 +66,11 @@ function Signup() {
         <input placeholder="Password" name="password" type="text" className=" col-start-2 rounded-md placeholder-black"/>
         <div className="col-start-2">
           <div className="grid grid-cols-2 gap-2">
-            <button value="host" type='button' onClick={handleType} className="col-start-1 bg-pallette5 focus:bg-pallette3">Host</button>
-            <button value="artist" type="button" onClick={handleType} className="col-start-2 bg-pallette5 focus:bg-pallette3">Artist</button>
+            <button value="host" type='button' onClick={handleType} className="col-start-1 bg-pallette4 focus:bg-pallette3">Host</button>
+            <button value="artist" type="button" onClick={handleType} className="col-start-2 bg-pallette4 focus:bg-pallette3">Artist</button>
           </div>
         </div>
-        <button type="submit" className=" col-start-2 rounded-md bg-pallette6">Create Account</button>
+        <button type="submit" className=" col-start-2 rounded-md bg-pallette5">Create Account</button>
       </form>
     </div>
     </>

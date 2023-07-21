@@ -78,7 +78,7 @@ function Login() {
           onBlur={formik.onBlur}
           value={formik.values.password}/>
           {formik.errors.password && formik.touched.password ? <p>{formik.errors.password}</p> : null}
-          <button className="col-start-2 bg-pallette6" type="submit">Submit</button>
+          <button className="col-start-2 bg-pallette5" type="submit">Submit</button>
           <h4 className="text-pallette6 text-sm text-right col-start-2 hover:underline cursor-pointer" onClick={()=>alert("L")} >Forgot password?</h4>
         </form>
       </div>
