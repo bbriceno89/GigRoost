@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Card from './Card';
-import { useNavigate } from "react-router-dom";
 
 const CardList = () => {
   const [rentalItems, setRentalItems] = useState([]);
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     // Fetch rental items from the server
@@ -18,13 +17,6 @@ const CardList = () => {
         console.error('Error fetching rental data:', error);
       });
   }, []);
-
-
-
-  const handleCardClick = (item) => {
-    // Navigate to the Details page when a card is clicked
-    navigate(`/details/${item.rental_id}`);
-  };
   
   return (
     <div className="bg-pallette1 w-fill h-fill mx-7 my-5">
@@ -32,9 +24,7 @@ const CardList = () => {
         Find a Place to Crash
       </h2>
       <div className="grid gap-4 grid-cols-4 py-7 px-3">
-        {rentalItems.map((item) => (
-          <Card item={item} key={item.rental_id} onClick={() => handleCardClick(item)} />
-        ))}
+        {rentalItems.map((item) => <Card item={item} key={item.rental_id}/> )}
       </div>
     </div>
   );

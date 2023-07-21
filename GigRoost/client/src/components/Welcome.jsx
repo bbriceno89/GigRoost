@@ -19,8 +19,8 @@ function Welcome() {
           <p className="text-2xl font-bold mb-4">
             GigRoost makes touring cheap and easy!
           </p>
-          <p className="ml-4">Find a place to stay near your venue, or offer your place in exchange for tickets!</p>
-          <p className="ml-4">With GigRoost, you are helping to bring together the music community!</p>
+          <p className="ml-6">Find a place to stay near your venue, or offer your place in exchange for tickets!</p>
+          <p className="ml-6">With GigRoost, you are helping to bring together the music community!</p>
         </div>
       </div>
     </div>
