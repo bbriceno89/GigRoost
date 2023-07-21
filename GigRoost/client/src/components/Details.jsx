@@ -12,6 +12,7 @@ function Details() {
   const [rentalBeds, setRentalBeds] = useState([]);
   const [rentalBaths, setRentalBaths] = useState([]);
   const [availabilityDates, setAvailabilityDates] = useState("");
+  const [rentalLocation, setRentalLocation] = useState("")
 
 
   const { id } = useParams();  
@@ -27,7 +28,7 @@ function Details() {
         setRentalImage(data.image_url);
         setRentalBeds(data.beds);
         setRentalBaths(data.baths);
-       
+        setRentalLocation(data.location)
       })
       .catch((error) => {
         console.error('Error fetching rental data:', error);
@@ -46,7 +47,7 @@ function Details() {
 
   return (
     <>
-      <div className="flex flex-col w-screen h-screen">
+      <div className="flex flex-col w-screen h-screen overflow-hidden bg-pallette1 px-2">
         <div className="bg-pallette1 flex justify-center items-center py-4">
          <label htmlFor= "start">Check Availability: </label>
           <input
@@ -62,21 +63,21 @@ function Details() {
 
         <div className="flex-1 flex">
           <div className="w-1/2 h-full">
-            <div className="h-full bg-gray-300">
+            <div className="h-full bg-pallette1">
               <img
                src={rentalImage} 
-                className="h-full w-full object-cover"
+                className="w-full object-cover outline outline-2 outline-pallette5 rounded-xl"
               />
             </div>
           </div>
 
           <div className="w-1/2 h-full">
-            <div className="h-full bg-pallette1 border border-gray-500 p-4 overflow-auto">
-              <h2 className="text-2xl font-bold mb-4">Apartment</h2>
-              <div>
-              <p className="text-lg">{rentalDescription}</p>
+            <div className="h-fulloutline border-gray-500 p-4 overflow-auto">
+              <h2 className="text-2xl text-pallette6 font-bold">{rentalLocation}</h2>
               <p className="test-lg">Beds:  {rentalBeds}</p>
               <p className="test-lg">Baths:  {Math.round(rentalBaths)}</p>
+              <div className="my-5 outline outline-pallette6 rounded-lg bg-gradient-to-t from-pallette5 to-pallette6">
+              <p className="text-lg text-pallette4">{rentalDescription}</p>
               </div>
             </div>
           </div>

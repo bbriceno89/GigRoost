@@ -8,7 +8,7 @@ export default {
         pallette2: "#970000",
         pallette3: "#BA2727",
         pallette4: "#424242",
-        pallette5: "#CCCCCC",
+        pallette5: "#AAAAAA",
         pallette6: "#DDDDDD",
       },
     },
