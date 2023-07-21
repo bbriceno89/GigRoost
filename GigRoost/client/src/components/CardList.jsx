@@ -9,8 +9,7 @@ const CardList = () => {
     fetch('/api/rentals?limit=8')
       .then((response) => response.json())
       .then((data) => {
-        const first8Items = data.slice(0,8);
-        setRentalItems(first8Items);
+        setRentalItems(data);
       })
       .catch((error) => {
         console.error('Error fetching rental data:', error);
@@ -18,7 +17,7 @@ const CardList = () => {
   }, []);
   
   return (
-    <div className="bg-pallette1 w-fill h-fill mx-7 my-5">
+    <div className="bg-pallette1 w-fill h-4/5 mx-7 my-5 overflow-y-scroll">
       <h2 className="text-pallette6 text-3xl font-bold text-center pt-5">
         Find a Place to Crash
       </h2>
