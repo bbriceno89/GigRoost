@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Header from "./components/Header";
 import Welcome from "./components/Welcome";
 import CardList from "./components/CardList"; 
-import Details from "./components/Details";
+import Details from "./components/Details"; 
 import { UserContext } from "./components/context/UserContext";
 import { Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
@@ -30,6 +30,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/rentals/new" element={<NewRental />} />
+        <Route path="/details/:rental_id" element={<Details />} />
       </Routes>
     </div>
   );
