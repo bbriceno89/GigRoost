@@ -135,7 +135,7 @@ class Rentals(Resource):
 
 class Rental_id(Resource):
     def get(self, id):
-        rental = Rental.query.filter(Rental.rental_id == rental_id).first()
+        rental = Rental.query.filter(Rental.rental_id == id).first()
 
         if not rental:
             return make_response({'error': 'Rental not found.'}, 404)
