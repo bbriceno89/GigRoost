@@ -110,12 +110,12 @@ class Rentals(Resource):
         location = data['location']
         beds = data['beds']
         baths = data['baths']
-        sq_ft = data['sq-ft']
+        sq_ft = data['sq_ft']
         description = data['description']
         image_url = data['image_url']
 
     # Perform some basic validation on the input data, you can add more checks as per your requirements.
-        if not location or not beds or not baths or not sq_ft or not description or not availability_dates:
+        if not location or not beds or not baths or not sq_ft or not description:
             return jsonify({'error': 'Please provide all required fields.'}), 400
 
         rental = Rental(
@@ -125,7 +125,6 @@ class Rentals(Resource):
             sq_ft=sq_ft,
             description=description,
             image_url = image_url,
-            availability_dates=availability_dates
         )
 
         db.session.add(rental)
