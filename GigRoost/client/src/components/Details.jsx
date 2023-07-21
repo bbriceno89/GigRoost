@@ -49,13 +49,13 @@ function Details() {
     <>
       <div className="flex flex-col w-screen h-screen overflow-hidden bg-pallette1 px-2">
         <div className="bg-pallette1 flex justify-center items-center py-4">
-         <label htmlFor= "start">Check Availability: </label>
+         <label htmlFor= "start" className="text-pallette6 pr-3">Check Availability:</label>
           <input
             type="date"
             id="start"
             name="trip-start"
             value= {availabilityDates}
-            className="border border-gray-400 rounded-lg px-3 py-2 mr-2 mb-2"
+            className="border border-pallette6 rounded-lg px-3 py-2 mr-2 mb-2 bg-gradient-to-b from-pallette5 to-pallette6"
             onChange = {handleChange}
           ></input>
         
