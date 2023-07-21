@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { UserContext } from "./context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
-  const { user, setUser } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   function handleLogout() {
     fetch('/api/logout', {
@@ -11,7 +13,10 @@ function NavBar() {
         'Content-type': 'application/json'
       }
     })
-    setUser(null)
+    .then(() => {
+      setUser(null);
+      navigate('/', { replace: true }); // Redirect to the welcome page after logout
+    });
   }
   
   const hostNav = (
@@ -59,7 +64,9 @@ function NavBar() {
   );
 
   return (
-    <nav className=" text-pallette6 bg-pallette2 w-screen text-right inline-flex flex-row-reverse px-2">{!user ? noUserNav : userNav}</nav>
+    <nav className="text-pallette6 bg-pallette2 w-screen text-right inline-flex flex-row-reverse px-2">
+      {!user ? noUserNav : userNav}
+    </nav>
   );
 }
 
